@@ -71,19 +71,29 @@ void Move(GameBoard &Map, Player &player, int key)
 	}
 }
 
-void Magic(int x, int y, Player& player, GameBoard& board)
+void Magic(int x, int y, Player& player, GameBoard& Map)
 {
 	x = (x / 10) * 10;
 	y = (y / 10) * 10;
-	if (x != 0 && y != 0 && x != (board.GetMap().size() - 1) * 10 && y != (board.GetMap().size() - 1) * 10)
+	int x_pos = player.GetXPosition();
+	int y_pos = player.GetYPosition();
+	if (x != 0 && y != 0 && x != (Map.GetMap().size() - 1) * 10 && y != (Map.GetMap().size() - 1) * 10)
 	{
-		if (abs(x - player.GetXPosition() + 5) + abs(y - player.GetYPosition() + 5) <= 50)
+		if (abs(x - x_pos + 5) + abs(y - y_pos + 5) <= 50)
 		{
-			player.SetAmmo(player.GetAmmo()-1);
-			if (board.GetMap()[x / 10][y / 10] == Place::WALL)
+			if (Map.GetMap()[x / 10][y / 10] == Place::WALL)
 			{
-				board.SetMapElement(x / 10, y / 10, Place::SPACE);
-				board.SetBackGroundElement(x / 10, y / 10, Place::SPACE);
+				player.SetAmmo(player.GetAmmo() + 1);
+				Map.SetMapElement(x / 10, y / 10, Place::SPACE);
+			}
+			else if (Map.GetMap()[x / 10][y / 10] == Place::SPACE)
+			{
+				if (Map.GetMap()[x_pos / 10][y_pos / 10] == Place::TRAP || Map.GetMap()[x_pos / 10][y_pos / 10 - 1] == Place::TRAP ||
+					Map.GetMap()[x_pos / 10 - 1][y_pos / 10 - 1] == Place::TRAP || Map.GetMap()[x_pos / 10 - 1][y_pos / 10] == Place::TRAP)
+				{
+					player.SetAmmo(player.GetAmmo() - 1);
+					Map.SetMapElement(x / 10, y / 10, Place::WALL);
+				}
 			}
 		}
 	}

@@ -228,10 +228,7 @@ public:
 			if (map[x][y] != Place::WALL && background[x][y] != Place::TRAP
 				&& !Eq(x, y, x_pos / 10, y_pos / 10) && !Eq(x, y, x_pos / 10 - 1, y_pos / 10 - 1)
 				&& !Eq(x, y,  x_pos / 10 - 1, y_pos / 10) && !Eq(x, y, x_pos / 10, y_pos / 10 - 1))
-			{
 				map[x][y] = Place::WALL;
-				background[x][y] = Place::WALL;
-			}
 			else i--;
 		}
 	}
