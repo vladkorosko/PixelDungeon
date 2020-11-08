@@ -5,7 +5,7 @@ int main()
     srand(time(NULL));
 	sf::RenderWindow window(sf::VideoMode(1200, 1000), "PixelDangeon");
     GameBoard Map(100);
-    Player player(100, 30, 30);
+    Player player(100, 20, 30, 30);
     Map.AutoGenerateWalls(1000, player);
     Map.AutoGenerateTraps(100, player);
     while (window.isOpen())

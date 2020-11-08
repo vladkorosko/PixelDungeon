@@ -23,14 +23,16 @@ class Player
 private:
 	int health;
 	int ammo;
+	int limit_ammo;
 	int x_pos;
 	int y_pos;
 
 public:
-	Player(int hp, int x_position, int y_position)
+	Player(int hp, int lim, int x_position, int y_position)
 	{
 		health = hp;
 		ammo = 10;
+		limit_ammo = lim;
 		x_pos = x_position;
 		y_pos = y_position;
 	}
@@ -39,6 +41,7 @@ public:
 	{
 		this->health = p.health;
 		this->ammo = p.ammo;
+		this->limit_ammo = p.limit_ammo;
 		this->x_pos = p.x_pos;
 		this->y_pos = p.y_pos;
 	}
@@ -61,6 +64,16 @@ public:
 	int GetAmmo() const
 	{
 		return ammo;
+	}
+
+	void SetLimitAmmo(const int& limit_ammo)
+	{
+		this->limit_ammo = limit_ammo;
+	}
+
+	int GetLimitAmmo() const
+	{
+		return limit_ammo;
 	}
 
 	void SetXPosition(const int& x)
@@ -98,17 +111,17 @@ public:
 		sf::Text text1;
 		sf::Font font;
 		font.loadFromFile("bold.ttf");
-		text1.setCharacterSize(50);
+		text1.setCharacterSize(25);
 		text1.setFont(font);
 		text1.setFillColor(sf::Color::Blue);
 		text1.setStyle(sf::Text::Bold);
 		text1.setString(to_string(health));
-		text1.setPosition(1000, 110);
+		text1.setPosition(1000, 25);
 		window.draw(text1);
 
 		text1.setFillColor(sf::Color::Red);
-		text1.setString(to_string(ammo));
-		text1.setPosition(1000, 310);
+		text1.setString(to_string(ammo) + " (max: " + to_string(limit_ammo) + ")");
+		text1.setPosition(1000, 50);
 		window.draw(text1);
 	}
 };

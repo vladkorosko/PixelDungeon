@@ -81,15 +81,15 @@ void Magic(int x, int y, Player& player, GameBoard& Map)
 	{
 		if (abs(x - x_pos + 5) + abs(y - y_pos + 5) <= 50)
 		{
-			if (Map.GetMap()[x / 10][y / 10] == Place::WALL)
+			if (Map.GetMap()[x / 10][y / 10] == Place::WALL && player.GetLimitAmmo() > player.GetAmmo())
 			{
 				player.SetAmmo(player.GetAmmo() + 1);
 				Map.SetMapElement(x / 10, y / 10, Place::SPACE);
 			}
-			else if (Map.GetMap()[x / 10][y / 10] == Place::SPACE)
+			else if (Map.GetMap()[x / 10][y / 10] == Place::SPACE && (0 < player.GetAmmo()))
 			{
-				if (Map.GetMap()[x_pos / 10][y_pos / 10] == Place::TRAP || Map.GetMap()[x_pos / 10][y_pos / 10 - 1] == Place::TRAP ||
-					Map.GetMap()[x_pos / 10 - 1][y_pos / 10 - 1] == Place::TRAP || Map.GetMap()[x_pos / 10 - 1][y_pos / 10] == Place::TRAP)
+				if (!((x_pos == x && y_pos == y) || (x_pos == x && y_pos - 10 == y) ||
+					(x_pos - 10 == x && y_pos - 10 == y) || (x_pos - 10 == x && y_pos == y)))
 				{
 					player.SetAmmo(player.GetAmmo() - 1);
 					Map.SetMapElement(x / 10, y / 10, Place::WALL);
