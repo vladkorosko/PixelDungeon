@@ -2,81 +2,87 @@
 
 void Move(GameBoard &Map, Player &player, int key)
 {
+	int x_pos = player.GetXPosition();
+	int y_pos = player.GetYPosition();
 	switch (key)
 	{
 	case 0:
-		if (Map.Map[player.x_pos / 10][player.y_pos / 10 - 2] && Map.Map[player.x_pos / 10 - 1][player.y_pos / 10 - 2])
+		if (Map.GetMap()[x_pos / 10][y_pos / 10 - 2] && Map.GetMap()[x_pos / 10 - 1][y_pos / 10 - 2])
 		{
-			player.y_pos -= 10;
-			if (Map.BackGround[player.x_pos / 10][player.y_pos / 10] == Place::Trap || Map.BackGround[player.x_pos / 10 - 1][player.y_pos / 10 - 1] == Place::Trap
-				|| Map.BackGround[player.x_pos / 10 - 1][player.y_pos / 10] == Place::Trap || Map.BackGround[player.x_pos / 10][player.y_pos / 10 - 1] == Place::Trap)
+			y_pos -= 10;
+			player.SetYPosition(y_pos);
+			if (Map.GetBackGround()[x_pos / 10][y_pos / 10] == Place::TRAP || Map.GetBackGround()[x_pos / 10 - 1][y_pos / 10 - 1] == Place::TRAP
+				|| Map.GetBackGround()[x_pos / 10 - 1][y_pos / 10] == Place::TRAP || Map.GetBackGround()[x_pos / 10][y_pos / 10 - 1] == Place::TRAP)
 			{
-				player.health -= 10;
-				Map.Map[player.x_pos / 10][player.y_pos / 10] = Map.BackGround[player.x_pos / 10][player.y_pos / 10];
-				Map.Map[player.x_pos / 10 - 1][player.y_pos / 10 - 1] = Map.BackGround[player.x_pos / 10 - 1][player.y_pos / 10 - 1];
-				Map.Map[player.x_pos / 10 - 1][player.y_pos / 10] = Map.BackGround[player.x_pos / 10 - 1][player.y_pos / 10];
-				Map.Map[player.x_pos / 10][player.y_pos / 10 - 1] = Map.BackGround[player.x_pos / 10][player.y_pos / 10 - 1];
-				Map.BackGround[player.x_pos / 10][player.y_pos / 10] = Place::Free;
-				Map.BackGround[player.x_pos / 10 - 1][player.y_pos / 10] = Place::Free;
-				Map.BackGround[player.x_pos / 10][player.y_pos / 10 - 1] = Place::Free;
-				Map.BackGround[player.x_pos / 10 - 1][player.y_pos / 10 - 1] = Place::Free;
+				player.SetHealth(player.GetHealth()-10);
+				Map.SetMapElement(x_pos / 10, y_pos / 10, Map.GetBackGround()[x_pos / 10][y_pos / 10]);
+				Map.SetMapElement(x_pos / 10 - 1, y_pos / 10 - 1, Map.GetBackGround()[x_pos / 10 - 1][y_pos / 10 - 1]);
+				Map.SetMapElement(x_pos / 10 - 1, y_pos / 10, Map.GetBackGround()[x_pos / 10 - 1][y_pos / 10]);
+				Map.SetMapElement(x_pos / 10, y_pos / 10 - 1, Map.GetBackGround()[x_pos / 10][y_pos / 10 - 1]);
+				Map.SetBackGroundElement(x_pos / 10, y_pos / 10, Place::SPACE);
+				Map.SetBackGroundElement(x_pos / 10 - 1, y_pos / 10, Place::SPACE);
+				Map.SetBackGroundElement(x_pos / 10, y_pos / 10 - 1, Place::SPACE);
+				Map.SetBackGroundElement(x_pos / 10 - 1, y_pos / 10 - 1, Place::SPACE);
 			}
 		}
 		break;
 	case 1:
-		if (Map.Map[player.x_pos / 10][player.y_pos / 10 + 1] && Map.Map[player.x_pos / 10 - 1][player.y_pos / 10 + 1])
+		if (Map.GetMap()[x_pos / 10][y_pos / 10 + 1] && Map.GetMap()[x_pos / 10 - 1][y_pos / 10 + 1])
 		{
-			player.y_pos += 10;
-			if (Map.BackGround[player.x_pos / 10][player.y_pos / 10] == Place::Trap || Map.BackGround[player.x_pos / 10 - 1][player.y_pos / 10 - 1] == Place::Trap
-				|| Map.BackGround[player.x_pos / 10 - 1][player.y_pos / 10] == Place::Trap || Map.BackGround[player.x_pos / 10][player.y_pos / 10 - 1] == Place::Trap)
+			y_pos += 10;
+			player.SetYPosition(y_pos);
+			if (Map.GetBackGround()[x_pos / 10][y_pos / 10] == Place::TRAP || Map.GetBackGround()[x_pos / 10 - 1][y_pos / 10 - 1] == Place::TRAP
+				|| Map.GetBackGround()[x_pos / 10 - 1][y_pos / 10] == Place::TRAP || Map.GetBackGround()[x_pos / 10][y_pos / 10 - 1] == Place::TRAP)
 			{
-				player.health -= 10;
-				Map.Map[player.x_pos / 10][player.y_pos / 10] = Map.BackGround[player.x_pos / 10][player.y_pos / 10];
-				Map.Map[player.x_pos / 10 - 1][player.y_pos / 10 - 1] = Map.BackGround[player.x_pos / 10 - 1][player.y_pos / 10 - 1];
-				Map.Map[player.x_pos / 10 - 1][player.y_pos / 10] = Map.BackGround[player.x_pos / 10 - 1][player.y_pos / 10];
-				Map.Map[player.x_pos / 10][player.y_pos / 10 - 1] = Map.BackGround[player.x_pos / 10][player.y_pos / 10 - 1];
-				Map.BackGround[player.x_pos / 10][player.y_pos / 10] = Place::Free;
-				Map.BackGround[player.x_pos / 10 - 1][player.y_pos / 10] = Place::Free;
-				Map.BackGround[player.x_pos / 10][player.y_pos / 10 - 1] = Place::Free;
-				Map.BackGround[player.x_pos / 10 - 1][player.y_pos / 10 - 1] = Place::Free;
+				player.SetHealth(player.GetHealth() - 10);
+				Map.SetMapElement(x_pos / 10, y_pos / 10, Map.GetBackGround()[x_pos / 10][y_pos / 10]);
+				Map.SetMapElement(x_pos / 10 - 1, y_pos / 10 - 1, Map.GetBackGround()[x_pos / 10 - 1][y_pos / 10 - 1]);
+				Map.SetMapElement(x_pos / 10 - 1, y_pos / 10, Map.GetBackGround()[x_pos / 10 - 1][y_pos / 10]);
+				Map.SetMapElement(x_pos / 10, y_pos / 10 - 1, Map.GetBackGround()[x_pos / 10][y_pos / 10 - 1]);
+				Map.SetBackGroundElement(x_pos / 10, y_pos / 10, Place::SPACE);
+				Map.SetBackGroundElement(x_pos / 10 - 1, y_pos / 10, Place::SPACE);
+				Map.SetBackGroundElement(x_pos / 10, y_pos / 10 - 1, Place::SPACE);
+				Map.SetBackGroundElement(x_pos / 10 - 1, y_pos / 10 - 1, Place::SPACE);
 			}
 		}
 		break;
 	case 2:
-		if (Map.Map[player.x_pos / 10 - 2][player.y_pos / 10] && Map.Map[player.x_pos / 10 - 2][player.y_pos / 10 - 1])
+		if (Map.GetMap()[x_pos / 10 - 2][y_pos / 10] && Map.GetMap()[x_pos / 10 - 2][y_pos / 10 - 1])
 		{
-			player.x_pos -= 10;
-			if (Map.BackGround[player.x_pos / 10][player.y_pos / 10] == Place::Trap || Map.BackGround[player.x_pos / 10 - 1][player.y_pos / 10 - 1] == Place::Trap
-				|| Map.BackGround[player.x_pos / 10 - 1][player.y_pos / 10] == Place::Trap || Map.BackGround[player.x_pos / 10][player.y_pos / 10 - 1] == Place::Trap)
+			x_pos -= 10;
+			player.SetXPosition(x_pos);
+			if (Map.GetBackGround()[x_pos / 10][y_pos / 10] == Place::TRAP || Map.GetBackGround()[x_pos / 10 - 1][y_pos / 10 - 1] == Place::TRAP
+				|| Map.GetBackGround()[x_pos / 10 - 1][y_pos / 10] == Place::TRAP || Map.GetBackGround()[x_pos / 10][y_pos / 10 - 1] == Place::TRAP)
 			{
-				player.health -= 10;
-				Map.Map[player.x_pos / 10][player.y_pos / 10] = Map.BackGround[player.x_pos / 10][player.y_pos / 10];
-				Map.Map[player.x_pos / 10 - 1][player.y_pos / 10 - 1] = Map.BackGround[player.x_pos / 10 - 1][player.y_pos / 10 - 1];
-				Map.Map[player.x_pos / 10 - 1][player.y_pos / 10] = Map.BackGround[player.x_pos / 10 - 1][player.y_pos / 10];
-				Map.Map[player.x_pos / 10][player.y_pos / 10 - 1] = Map.BackGround[player.x_pos / 10][player.y_pos / 10 - 1];
-				Map.BackGround[player.x_pos / 10][player.y_pos / 10] = Place::Free;
-				Map.BackGround[player.x_pos / 10 - 1][player.y_pos / 10] = Place::Free;
-				Map.BackGround[player.x_pos / 10][player.y_pos / 10 - 1] = Place::Free;
-				Map.BackGround[player.x_pos / 10 - 1][player.y_pos / 10 - 1] = Place::Free;
+				player.SetHealth(player.GetHealth() - 10);
+				Map.SetMapElement(x_pos / 10, y_pos / 10, Map.GetBackGround()[x_pos / 10][y_pos / 10]);
+				Map.SetMapElement(x_pos / 10 - 1, y_pos / 10 - 1, Map.GetBackGround()[x_pos / 10 - 1][y_pos / 10 - 1]);
+				Map.SetMapElement(x_pos / 10 - 1, y_pos / 10, Map.GetBackGround()[x_pos / 10 - 1][y_pos / 10]);
+				Map.SetMapElement(x_pos / 10, y_pos / 10 - 1, Map.GetBackGround()[x_pos / 10][y_pos / 10 - 1]);
+				Map.SetBackGroundElement(x_pos / 10, y_pos / 10, Place::SPACE);
+				Map.SetBackGroundElement(x_pos / 10 - 1, y_pos / 10, Place::SPACE);
+				Map.SetBackGroundElement(x_pos / 10, y_pos / 10 - 1, Place::SPACE);
+				Map.SetBackGroundElement(x_pos / 10 - 1, y_pos / 10 - 1, Place::SPACE);
 			}
 		}
 		break;
 	case 3:
-		if (Map.Map[player.x_pos / 10 + 1][player.y_pos / 10] && Map.Map[player.x_pos / 10 + 1][player.y_pos / 10 - 1])
+		if (Map.GetMap()[x_pos / 10 + 1][y_pos / 10] && Map.GetMap()[x_pos / 10 + 1][y_pos / 10 - 1])
 		{
-			player.x_pos += 10;
-			if (Map.BackGround[player.x_pos / 10][player.y_pos / 10] == Place::Trap || Map.BackGround[player.x_pos / 10 - 1][player.y_pos / 10 - 1] == Place::Trap
-				|| Map.BackGround[player.x_pos / 10 - 1][player.y_pos / 10] == Place::Trap || Map.BackGround[player.x_pos / 10][player.y_pos / 10 - 1] == Place::Trap)
+			x_pos += 10;
+			player.SetXPosition(x_pos);
+			if (Map.GetBackGround()[x_pos / 10][y_pos / 10] == Place::TRAP || Map.GetBackGround()[x_pos / 10 - 1][y_pos / 10 - 1] == Place::TRAP
+				|| Map.GetBackGround()[x_pos / 10 - 1][y_pos / 10] == Place::TRAP || Map.GetBackGround()[x_pos / 10][y_pos / 10 - 1] == Place::TRAP)
 			{
-				player.health -= 10;
-				Map.Map[player.x_pos / 10][player.y_pos / 10] = Map.BackGround[player.x_pos / 10][player.y_pos / 10];
-				Map.Map[player.x_pos / 10 - 1][player.y_pos / 10 - 1] = Map.BackGround[player.x_pos / 10 - 1][player.y_pos / 10 - 1];
-				Map.Map[player.x_pos / 10 - 1][player.y_pos / 10] = Map.BackGround[player.x_pos / 10 - 1][player.y_pos / 10];
-				Map.Map[player.x_pos / 10][player.y_pos / 10 - 1] = Map.BackGround[player.x_pos / 10][player.y_pos / 10 - 1];
-				Map.BackGround[player.x_pos / 10][player.y_pos / 10] = Place::Free;
-				Map.BackGround[player.x_pos / 10 - 1][player.y_pos / 10] = Place::Free;
-				Map.BackGround[player.x_pos / 10][player.y_pos / 10 - 1] = Place::Free;
-				Map.BackGround[player.x_pos / 10 - 1][player.y_pos / 10 - 1] = Place::Free;
+				player.SetHealth(player.GetHealth() - 10);
+				Map.SetMapElement(x_pos / 10, y_pos / 10, Map.GetBackGround()[x_pos / 10][y_pos / 10]);
+				Map.SetMapElement(x_pos / 10 - 1, y_pos / 10 - 1, Map.GetBackGround()[x_pos / 10 - 1][y_pos / 10 - 1]);
+				Map.SetMapElement(x_pos / 10 - 1, y_pos / 10, Map.GetBackGround()[x_pos / 10 - 1][y_pos / 10]);
+				Map.SetMapElement(x_pos / 10, y_pos / 10 - 1, Map.GetBackGround()[x_pos / 10][y_pos / 10 - 1]);
+				Map.SetBackGroundElement(x_pos / 10, y_pos / 10, Place::SPACE);
+				Map.SetBackGroundElement(x_pos / 10 - 1, y_pos / 10, Place::SPACE);
+				Map.SetBackGroundElement(x_pos / 10, y_pos / 10 - 1, Place::SPACE);
+				Map.SetBackGroundElement(x_pos / 10 - 1, y_pos / 10 - 1, Place::SPACE);
 			}
 		}
 		break;
@@ -89,15 +95,15 @@ void Magic(int x, int y, Player& player, GameBoard& board)
 {
 	x = (x / 10) * 10;
 	y = (y / 10) * 10;
-	if (x != 0 && y != 0 && x != (board.Map.size() - 1) * 10 && y != (board.Map.size() - 1) * 1)
+	if (x != 0 && y != 0 && x != (board.GetMap().size() - 1) * 10 && y != (board.GetMap().size() - 1) * 10)
 	{
-		if (abs(x - player.x_pos + 5) + abs(y - player.y_pos + 5) <= 50)
+		if (abs(x - player.GetXPosition() + 5) + abs(y - player.GetYPosition() + 5) <= 50)
 		{
-			player.ammo--;
-			if (board.Map[x / 10][y / 10] == Place::Wall)
+			player.SetAmmo(player.GetAmmo()-1);
+			if (board.GetMap()[x / 10][y / 10] == Place::WALL)
 			{
-				board.Map[x / 10][y / 10] = Place::Free;
-				board.BackGround[x / 10][y / 10] = Place::Free;
+				board.SetMapElement(x / 10, y / 10, Place::SPACE);
+				board.SetBackGroundElement(x / 10, y / 10, Place::SPACE);
 			}
 		}
 	}

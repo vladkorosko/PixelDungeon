@@ -13,25 +13,74 @@ bool Eq(int x1, int y1, int x2, int y2);
 
 enum Place
 {
-	Wall,
-	Free,
-	Trap
-
+	WALL,
+	SPACE,
+	TRAP
 };
 
-struct Player
+class Player
 {
+private:
 	int health;
 	int ammo;
 	int x_pos;
 	int y_pos;
 
+public:
 	Player(int hp, int x_position, int y_position)
 	{
 		health = hp;
 		ammo = 10;
 		x_pos = x_position;
 		y_pos = y_position;
+	}
+
+	void operator=(const Player& p)
+	{
+		this->health = p.health;
+		this->ammo = p.ammo;
+		this->x_pos = p.x_pos;
+		this->y_pos = p.y_pos;
+	}
+
+	void SetHealth(const int& hp)
+	{
+		this->health = hp;
+	}
+
+	int GetHealth() const
+	{
+		return health;
+	}
+
+	void SetAmmo(const int& ammo)
+	{
+		this->ammo = ammo;
+	}
+
+	int GetAmmo() const
+	{
+		return ammo;
+	}
+
+	void SetXPosition(const int& x)
+	{
+		this->x_pos = x;
+	}
+
+	int GetXPosition() const 
+	{
+		return x_pos;
+	}
+
+	void SetYPosition(const int& y)
+	{
+		this->y_pos = y;
+	}
+
+	int GetYPosition() const
+	{
+		return y_pos;
 	}
 
 	void Draw(sf::RenderWindow &window)
@@ -64,29 +113,51 @@ struct Player
 	}
 };
 
-struct GameBoard
+class GameBoard
 {
-	vector<vector<Place>> Map;
-	vector<vector<Place>> BackGround;
+private:
+	vector<vector<Place>> map;
+	vector<vector<Place>> background;
 
+public:
 	GameBoard(int size)
 	{
-		vector<vector<Place>> s(size, (vector<Place>(size, Place::Free)));
+		vector<vector<Place>> s(size, (vector<Place>(size, Place::SPACE)));
 		for (int i = 0; i < size; i++)
 			{
-				s[0][i] = Place::Wall;
-				s[size - 1][i] = Place::Wall;
-				s[i][0] = Place::Wall;
-				s[i][size - 1] = Place::Wall;
+				s[0][i] = Place::WALL;
+				s[size - 1][i] = Place::WALL;
+				s[i][0] = Place::WALL;
+				s[i][size - 1] = Place::WALL;
 			}
-		Map = s;
-		BackGround = s;
+		map = s;
+		background = s;
+	}
+
+	void SetMapElement(const int& x, const int& y, const Place& p)
+	{
+		map[x][y] = p;
+	}
+
+	vector<vector<Place>> GetMap() const
+	{
+		return map;
+	}
+
+	void SetBackGroundElement(const int& x, const int& y, const Place& p)
+	{
+		background[x][y] = p;
+	}
+
+	vector<vector<Place>> GetBackGround() const
+	{
+		return background;
 	}
 
 	void Draw(sf::RenderWindow& window)
 	{
-		for (int i = 0; i < Map.size(); i++)
-			for (int j = 0; j < Map.size(); j++)
+		for (int i = 0; i < map.size(); i++)
+			for (int j = 0; j < map.size(); j++)
 			{
 				sf::Color Wall = sf::Color::Color(47, 79, 79, 255);
 				sf::Color Free = sf::Color::Color(218, 165, 32, 255);
@@ -94,7 +165,7 @@ struct GameBoard
 				sf::RectangleShape body;
 				body.setSize(sf::Vector2f(10, 10));
 				body.setPosition(i*10, j*10);
-				switch (Map[i][j])
+				switch (map[i][j])
 				{
 				case 0:
 					body.setFillColor(Wall);
@@ -117,10 +188,10 @@ struct GameBoard
 		back.setPosition(0,0);
 		back.setFillColor(sf::Color::Color(128, 128, 128, 255));
 		window.draw(back);
-		for (int i = 0; i < Map.size(); i++)
-			for (int j = 0; j < Map.size(); j++)
+		for (int i = 0; i < map.size(); i++)
+			for (int j = 0; j < map.size(); j++)
 			{
-				if (abs(10 * i - player.x_pos+5) + abs(j * 10  - player.y_pos+5) <= 50)
+				if (abs(10 * i - player.GetXPosition()+5) + abs(j * 10  - player.GetYPosition()+5) <= 50)
 				{
 					sf::Color Wall = sf::Color::Color(47, 79, 79, 255);
 					sf::Color Free = sf::Color::Color(218, 165, 32, 255);
@@ -128,7 +199,7 @@ struct GameBoard
 					sf::RectangleShape body;
 					body.setSize(sf::Vector2f(10, 10));
 					body.setPosition(i * 10, j * 10);
-					switch (Map[i][j])
+					switch (map[i][j])
 					{
 					case 0:
 						body.setFillColor(Wall);
@@ -149,14 +220,17 @@ struct GameBoard
 	{
 		for (int i = 0; i < number_of_walls; i++)
 		{
-			int x = rand() % Map.size();
-			int y = rand() % Map.size();
-			if (Map[x][y] != Place::Wall && BackGround[x][y] != Place::Trap
-				&& !Eq(x, y, player.x_pos / 10, player.y_pos / 10) && !Eq(x, y, player.x_pos / 10 - 1, player.y_pos / 10 - 1)
-				&& !Eq(x, y, player.x_pos / 10 - 1, player.y_pos / 10) && !Eq(x, y, player.x_pos / 10, player.y_pos / 10 - 1))
+			int x = rand() % map.size();
+			int y = rand() % map.size();
+			int x_pos = player.GetXPosition();
+			int y_pos = player.GetYPosition();
+
+			if (map[x][y] != Place::WALL && background[x][y] != Place::TRAP
+				&& !Eq(x, y, x_pos / 10, y_pos / 10) && !Eq(x, y, x_pos / 10 - 1, y_pos / 10 - 1)
+				&& !Eq(x, y,  x_pos / 10 - 1, y_pos / 10) && !Eq(x, y, x_pos / 10, y_pos / 10 - 1))
 			{
-				Map[x][y] = Place::Wall;
-				BackGround[x][y] = Place::Wall;
+				map[x][y] = Place::WALL;
+				background[x][y] = Place::WALL;
 			}
 			else i--;
 		}
@@ -166,12 +240,15 @@ struct GameBoard
 	{
 		for (int i = 0; i < number_of_walls; i++)
 		{
-			int x = rand() % Map.size();
-			int y = rand() % Map.size();
-			if (Map[x][y] != Place::Wall && BackGround[x][y] != Place::Trap
-				&& !Eq(x, y, player.x_pos / 10, player.y_pos / 10) && !Eq(x, y, player.x_pos / 10 - 1, player.y_pos / 10 - 1)
-				&& !Eq(x, y, player.x_pos / 10 - 1, player.y_pos / 10) && !Eq(x, y, player.x_pos / 10, player.y_pos / 10 - 1))
-				BackGround[x][y] = Place::Trap;
+			int x = rand() % map.size();
+			int y = rand() % map.size();
+			int x_pos = player.GetXPosition();
+			int y_pos = player.GetYPosition();
+
+			if (map[x][y] != Place::WALL && background[x][y] != Place::TRAP
+				&& !Eq(x, y, x_pos / 10, y_pos / 10) && !Eq(x, y, x_pos / 10 - 1, y_pos / 10 - 1)
+				&& !Eq(x, y, x_pos / 10 - 1, y_pos / 10) && !Eq(x, y, x_pos / 10, y_pos / 10 - 1))
+				background[x][y] = Place::TRAP;
 			else i--;
 		}
 	}
