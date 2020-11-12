@@ -8,7 +8,8 @@ int main()
     Player player(100, 20, 30, 30);
     Map.AutoGenerateWalls(1000, player);
     Map.AutoGenerateTraps(100, player);
-
+    Map.AutoGenerateBonusHealth(50,player);
+    Map.AutoGenerateBonusBlocks(10,player);
     while (window.isOpen())
     {
         sf::Event event;

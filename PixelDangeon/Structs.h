@@ -9,12 +9,16 @@
 
 using namespace std;
 
-const sf::Color Wall = sf::Color::Color(47, 79, 79, 255);
+const sf::Color HiddenWall = sf::Color::Color(47, 79, 79, 255);
 const sf::Color Free = sf::Color::Color(218, 165, 32, 255);
 const sf::Color Trap = sf::Color::Color(255, 69, 0, 255);
-const sf::Color HiddenWall = sf::Color::Color(105, 105, 105, 255);
+const sf::Color IncreaseHP = sf::Color::Color(0, 255, 255, 255);
+const sf::Color ImproveBag = sf::Color::Color(255, 20, 147, 255);
+const sf::Color Wall = sf::Color::Color(105, 105, 105, 255);
 const sf::Color HiddenTrap = sf::Color::Color(178, 34, 34, 255);
 const sf::Color HiddenFree = sf::Color::Color(184, 134, 11, 255);
+const sf::Color HiddenIncreaseHP = sf::Color::Color(30, 144, 255, 255);
+const sf::Color HiddenImproveBag = sf::Color::Color(199, 21, 133, 255);
 
 bool Eq(int x1, int y1, int x2, int y2);
 
@@ -22,7 +26,9 @@ enum Place
 {
 	WALL,
 	SPACE,
-	TRAP
+	TRAP,
+	ICREASEHP,
+	IMPROVEBAG,
 };
 
 class Player
@@ -190,9 +196,16 @@ public:
 				case 1:
 					body.setFillColor(HiddenFree);
 					break;
-				default:
+				case 2:
 					body.setFillColor(HiddenTrap);
 					break;
+				case 3:
+					body.setFillColor(HiddenIncreaseHP);
+					break;
+				default:
+					body.setFillColor(HiddenImproveBag);
+					break;
+
 				}
 				window.draw(body);
 			}
@@ -216,8 +229,14 @@ public:
 					case 1:
 						body.setFillColor(free);
 						break;
-					default:
+					case 2:
 						body.setFillColor(trap);
+						break;
+					case 3:
+						body.setFillColor(IncreaseHP);
+						break;
+					default:
+						body.setFillColor(ImproveBag);
 						break;
 					}
 					window.draw(body);
@@ -225,7 +244,7 @@ public:
 			}
 	}
 
-	void AutoGenerateWalls(int number_of_walls, Player player)
+	void AutoGenerateWalls(int number_of_walls, const Player& player)
 	{
 		for (int i = 0; i < number_of_walls; i++)
 		{
@@ -234,7 +253,7 @@ public:
 			int x_pos = player.GetXPosition();
 			int y_pos = player.GetYPosition();
 
-			if (map[x][y] != Place::WALL && background[x][y] != Place::TRAP
+			if (map[x][y] != Place::WALL
 				&& !Eq(x, y, x_pos / 10, y_pos / 10) && !Eq(x, y, x_pos / 10 - 1, y_pos / 10 - 1)
 				&& !Eq(x, y,  x_pos / 10 - 1, y_pos / 10) && !Eq(x, y, x_pos / 10, y_pos / 10 - 1))
 				map[x][y] = Place::WALL;
@@ -242,9 +261,9 @@ public:
 		}
 	}
 	
-	void AutoGenerateTraps(int number_of_walls, Player player)
+	void AutoGenerateTraps(int number_of_traps, const Player& player)
 	{
-		for (int i = 0; i < number_of_walls; i++)
+		for (int i = 0; i < number_of_traps; i++)
 		{
 			int x = rand() % map.size();
 			int y = rand() % map.size();
@@ -255,6 +274,40 @@ public:
 				&& !Eq(x, y, x_pos / 10, y_pos / 10) && !Eq(x, y, x_pos / 10 - 1, y_pos / 10 - 1)
 				&& !Eq(x, y, x_pos / 10 - 1, y_pos / 10) && !Eq(x, y, x_pos / 10, y_pos / 10 - 1))
 				background[x][y] = Place::TRAP;
+			else i--;
+		}
+	}
+
+	void AutoGenerateBonusHealth(int number_of_hp, const Player& player)
+	{
+		for (int i = 0; i < number_of_hp; i++)
+		{
+			int x = rand() % map.size();
+			int y = rand() % map.size();
+			int x_pos = player.GetXPosition();
+			int y_pos = player.GetYPosition();
+
+			if (map[x][y] != Place::WALL && background[x][y] != Place::TRAP && map[x][y] != Place::ICREASEHP
+				&& !Eq(x, y, x_pos / 10, y_pos / 10) && !Eq(x, y, x_pos / 10 - 1, y_pos / 10 - 1)
+				&& !Eq(x, y, x_pos / 10 - 1, y_pos / 10) && !Eq(x, y, x_pos / 10, y_pos / 10 - 1))
+				map[x][y] = Place::ICREASEHP;
+			else i--;
+		}
+	}
+
+	void AutoGenerateBonusBlocks(int number_of_items, const Player& player)
+	{
+		for (int i = 0; i < number_of_items; i++)
+		{
+			int x = rand() % map.size();
+			int y = rand() % map.size();
+			int x_pos = player.GetXPosition();
+			int y_pos = player.GetYPosition();
+
+			if (map[x][y] != Place::WALL && background[x][y] != Place::TRAP && map[x][y] != Place::ICREASEHP && map[x][y] != Place::IMPROVEBAG
+				&& !Eq(x, y, x_pos / 10, y_pos / 10) && !Eq(x, y, x_pos / 10 - 1, y_pos / 10 - 1)
+				&& !Eq(x, y, x_pos / 10 - 1, y_pos / 10) && !Eq(x, y, x_pos / 10, y_pos / 10 - 1))
+				map[x][y] = Place::IMPROVEBAG;
 			else i--;
 		}
 	}
