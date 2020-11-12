@@ -9,6 +9,13 @@
 
 using namespace std;
 
+const sf::Color Wall = sf::Color::Color(47, 79, 79, 255);
+const sf::Color Free = sf::Color::Color(218, 165, 32, 255);
+const sf::Color Trap = sf::Color::Color(255, 69, 0, 255);
+const sf::Color HiddenWall = sf::Color::Color(105, 105, 105, 255);
+const sf::Color HiddenTrap = sf::Color::Color(178, 34, 34, 255);
+const sf::Color HiddenFree = sf::Color::Color(184, 134, 11, 255);
+
 bool Eq(int x1, int y1, int x2, int y2);
 
 enum Place
@@ -172,56 +179,45 @@ public:
 		for (int i = 0; i < map.size(); i++)
 			for (int j = 0; j < map.size(); j++)
 			{
-				sf::Color Wall = sf::Color::Color(47, 79, 79, 255);
-				sf::Color Free = sf::Color::Color(218, 165, 32, 255);
-				sf::Color Trap = sf::Color::Color(255, 69, 0, 255);
 				sf::RectangleShape body;
 				body.setSize(sf::Vector2f(10, 10));
 				body.setPosition(i*10, j*10);
 				switch (map[i][j])
 				{
 				case 0:
-					body.setFillColor(Wall);
+					body.setFillColor(HiddenWall);
 					break;
 				case 1:
-					body.setFillColor(Free);
+					body.setFillColor(HiddenFree);
 					break;
 				default:
-					body.setFillColor(Trap);
+					body.setFillColor(HiddenTrap);
 					break;
 				}
 				window.draw(body);
 			}
 	}
 
-	void DrawVision(sf::RenderWindow& window, Player player)
+	void DrawVision(sf::RenderWindow& window, const Player& player, const sf::Color wall, const sf::Color free, const sf::Color trap)
 	{
-		sf::RectangleShape back;
-		back.setSize(sf::Vector2f(1000, 1000));
-		back.setPosition(0,0);
-		back.setFillColor(sf::Color::Color(128, 128, 128, 255));
-		window.draw(back);
 		for (int i = 0; i < map.size(); i++)
 			for (int j = 0; j < map.size(); j++)
 			{
 				if (abs(10 * i - player.GetXPosition()+5) + abs(j * 10  - player.GetYPosition()+5) <= 50)
 				{
-					sf::Color Wall = sf::Color::Color(47, 79, 79, 255);
-					sf::Color Free = sf::Color::Color(218, 165, 32, 255);
-					sf::Color Trap = sf::Color::Color(255, 69, 0, 255);
 					sf::RectangleShape body;
 					body.setSize(sf::Vector2f(10, 10));
 					body.setPosition(i * 10, j * 10);
 					switch (map[i][j])
 					{
 					case 0:
-						body.setFillColor(Wall);
+						body.setFillColor(wall);
 						break;
 					case 1:
-						body.setFillColor(Free);
+						body.setFillColor(free);
 						break;
 					default:
-						body.setFillColor(Trap);
+						body.setFillColor(trap);
 						break;
 					}
 					window.draw(body);
