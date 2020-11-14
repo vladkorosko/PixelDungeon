@@ -27,7 +27,7 @@ enum Place
 	WALL,
 	SPACE,
 	TRAP,
-	ICREASEHP,
+	INCREASEHP,
 	IMPROVEBAG,
 };
 
@@ -287,10 +287,10 @@ public:
 			int x_pos = player.GetXPosition();
 			int y_pos = player.GetYPosition();
 
-			if (map[x][y] != Place::WALL && background[x][y] != Place::TRAP && map[x][y] != Place::ICREASEHP
+			if (map[x][y] != Place::WALL && background[x][y] != Place::TRAP && map[x][y] != Place::INCREASEHP
 				&& !Eq(x, y, x_pos / 10, y_pos / 10) && !Eq(x, y, x_pos / 10 - 1, y_pos / 10 - 1)
 				&& !Eq(x, y, x_pos / 10 - 1, y_pos / 10) && !Eq(x, y, x_pos / 10, y_pos / 10 - 1))
-				map[x][y] = Place::ICREASEHP;
+				map[x][y] = Place::INCREASEHP;
 			else i--;
 		}
 	}
@@ -304,7 +304,7 @@ public:
 			int x_pos = player.GetXPosition();
 			int y_pos = player.GetYPosition();
 
-			if (map[x][y] != Place::WALL && background[x][y] != Place::TRAP && map[x][y] != Place::ICREASEHP && map[x][y] != Place::IMPROVEBAG
+			if (map[x][y] != Place::WALL && background[x][y] != Place::TRAP && map[x][y] != Place::INCREASEHP && map[x][y] != Place::IMPROVEBAG
 				&& !Eq(x, y, x_pos / 10, y_pos / 10) && !Eq(x, y, x_pos / 10 - 1, y_pos / 10 - 1)
 				&& !Eq(x, y, x_pos / 10 - 1, y_pos / 10) && !Eq(x, y, x_pos / 10, y_pos / 10 - 1))
 				map[x][y] = Place::IMPROVEBAG;
