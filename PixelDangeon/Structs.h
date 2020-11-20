@@ -129,12 +129,12 @@ public:
 		text1.setFillColor(sf::Color::Blue);
 		text1.setStyle(sf::Text::Bold);
 		text1.setString(to_string(health));
-		text1.setPosition(1000, 25);
+		text1.setPosition(window.getSize().y, 25);
 		window.draw(text1);
 
 		text1.setFillColor(sf::Color::Red);
 		text1.setString(to_string(ammo) + " (max: " + to_string(limit_ammo) + ")");
-		text1.setPosition(1000, 50);
+		text1.setPosition(window.getSize().y, 50);
 		window.draw(text1);
 	}
 };
@@ -316,3 +316,6 @@ public:
 void Magic(int x, int y, Player& player, GameBoard& board);
 bool Exit();
 void Move(GameBoard &Map, Player& player, int key);
+
+void Game(sf::RenderWindow& window);
+void Menu(sf::RenderWindow &window);
