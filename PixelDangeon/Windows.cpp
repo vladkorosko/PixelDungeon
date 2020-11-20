@@ -80,11 +80,61 @@ bool Exit()
 	return res;
 }
 
-void Game(sf::RenderWindow& window)
+Player Generating(sf::RenderWindow& window, Player p = Player(100,20,30,30))
+{
+    time_t start = clock();
+    while (window.isOpen())
+    {
+        time_t finish = clock();
+        sf::Event event;
+        while (window.pollEvent(event))
+        {
+            if (event.type == sf::Event::Closed ||
+                (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape))
+                if (Exit())
+                {
+                    Menu(window);
+                }
+        }
+        time_t wt = finish - start;
+        if (wt >= 10000)
+        {
+            return p;
+        }
+        window.clear();
+        string text = "Loading";
+        switch ((wt / 500) % 3)
+        {
+        case 0:
+            text = text + ".";
+            break;
+        case 1:
+            text = text + "..";
+            break;
+        case 2:
+            text = text + "...";
+            break;
+        default:
+            break;
+        }
+        sf::Text text1;
+        sf::Font font;
+        font.loadFromFile("bold.ttf");
+        text1.setCharacterSize(100);
+        text1.setFont(font);
+        text1.setFillColor(sf::Color::Blue);
+        text1.setStyle(sf::Text::Bold);
+        text1.setString(text);
+        text1.setPosition(window.getSize().x / 2 - text.size() * 25, window.getSize().y / 2 - 50);
+        window.draw(text1);
+        window.display();
+    }
+}
+
+void Game(sf::RenderWindow& window, Player &player)
 {
     srand(time(NULL));
     GameBoard Map(window.getSize().y/10);
-    Player player(100, 20, 30, 30);
     Map.AutoGenerateWalls(1000, player);
     Map.AutoGenerateTraps(100, player);
     Map.AutoGenerateBonusHealth(50, player);
@@ -158,10 +208,13 @@ void Menu(sf::RenderWindow& window)
                 else position--;
             }
             if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Enter)
+            {
+                Player p(100, 20, 30, 30);
                 switch (position)
                 {
                 case 1:
-                    Game(window);
+                    p = Generating(window);
+                    Game(window, p);
                     break;
                 case 2:
                     //prev_game(4, window);
@@ -174,6 +227,7 @@ void Menu(sf::RenderWindow& window)
                         window.close();
                     break;
                 }
+            }
         }
 
         window.clear();

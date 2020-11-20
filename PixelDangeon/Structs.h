@@ -317,5 +317,5 @@ void Magic(int x, int y, Player& player, GameBoard& board);
 bool Exit();
 void Move(GameBoard &Map, Player& player, int key);
 
-void Game(sf::RenderWindow& window);
+void Game(sf::RenderWindow& window, Player& p);
 void Menu(sf::RenderWindow &window);
