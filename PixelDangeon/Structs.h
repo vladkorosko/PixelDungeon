@@ -19,6 +19,7 @@ const sf::Color HiddenTrap = sf::Color::Color(178, 34, 34, 255);
 const sf::Color HiddenFree = sf::Color::Color(184, 134, 11, 255);
 const sf::Color HiddenIncreaseHP = sf::Color::Color(30, 144, 255, 255);
 const sf::Color HiddenImproveBag = sf::Color::Color(199, 21, 133, 255);
+const sf::Color Portal = sf::Color::Color(0, 0, 128, 128);
 
 bool Eq(int x1, int y1, int x2, int y2);
 
@@ -29,6 +30,7 @@ enum Place
 	TRAP,
 	INCREASEHP,
 	IMPROVEBAG,
+	PORTAL
 };
 
 class Player
@@ -144,11 +146,14 @@ class GameBoard
 private:
 	vector<vector<Place>> map;
 	vector<vector<Place>> background;
+	int x_portal;
+	int y_portal;
 
 public:
 	GameBoard(int size)
 	{
 		vector<vector<Place>> s(size, (vector<Place>(size, Place::SPACE)));
+		background = s;
 		for (int i = 0; i < size; i++)
 			{
 				s[0][i] = Place::WALL;
@@ -157,7 +162,13 @@ public:
 				s[i][size - 1] = Place::WALL;
 			}
 		map = s;
-		background = s;
+		srand(time(NULL));
+		x_portal = rand() % (size - 3);
+		y_portal = rand() % (size - 3);
+		map[x_portal][y_portal] = Place::PORTAL;
+		map[x_portal + 1][y_portal] = Place::PORTAL;
+		map[x_portal][y_portal + 1] = Place::PORTAL;
+		map[x_portal + 1][y_portal + 1] = Place::PORTAL;
 	}
 
 	void SetMapElement(const int& x, const int& y, const Place& p)
@@ -178,6 +189,16 @@ public:
 	vector<vector<Place>> GetBackGround() const
 	{
 		return background;
+	}
+
+	int GetXPortal() const
+	{
+		return x_portal;
+	}
+
+	int GetYPortal() const
+	{
+		return y_portal;
 	}
 
 	void Draw(sf::RenderWindow& window)
@@ -202,10 +223,12 @@ public:
 				case 3:
 					body.setFillColor(HiddenIncreaseHP);
 					break;
-				default:
+				case 4:
 					body.setFillColor(HiddenImproveBag);
 					break;
-
+				default:
+					body.setFillColor(Portal);
+					break;
 				}
 				window.draw(body);
 			}
@@ -235,8 +258,11 @@ public:
 					case 3:
 						body.setFillColor(IncreaseHP);
 						break;
-					default:
+					case 4:
 						body.setFillColor(ImproveBag);
+						break;
+					default:
+						body.setFillColor(Portal);
 						break;
 					}
 					window.draw(body);
@@ -255,7 +281,9 @@ public:
 
 			if (map[x][y] != Place::WALL
 				&& !Eq(x, y, x_pos / 10, y_pos / 10) && !Eq(x, y, x_pos / 10 - 1, y_pos / 10 - 1)
-				&& !Eq(x, y,  x_pos / 10 - 1, y_pos / 10) && !Eq(x, y, x_pos / 10, y_pos / 10 - 1))
+				&& !Eq(x, y, x_pos / 10 - 1, y_pos / 10) && !Eq(x, y, x_pos / 10, y_pos / 10 - 1)
+				&& !Eq(x, y, x_portal, y_portal) && !Eq(x, y, x_portal + 1, y_portal + 1)
+				&& !Eq(x, y, x_portal, y_portal + 1) && !Eq(x, y, x_portal + 1, y_portal))
 				map[x][y] = Place::WALL;
 			else i--;
 		}
@@ -272,7 +300,9 @@ public:
 
 			if (map[x][y] != Place::WALL && background[x][y] != Place::TRAP
 				&& !Eq(x, y, x_pos / 10, y_pos / 10) && !Eq(x, y, x_pos / 10 - 1, y_pos / 10 - 1)
-				&& !Eq(x, y, x_pos / 10 - 1, y_pos / 10) && !Eq(x, y, x_pos / 10, y_pos / 10 - 1))
+				&& !Eq(x, y, x_pos / 10 - 1, y_pos / 10) && !Eq(x, y, x_pos / 10, y_pos / 10 - 1)
+				&& !Eq(x, y, x_portal, y_portal) && !Eq(x, y, x_portal + 1, y_portal + 1)
+				&& !Eq(x, y, x_portal, y_portal + 1) && !Eq(x, y, x_portal + 1, y_portal))
 				background[x][y] = Place::TRAP;
 			else i--;
 		}
@@ -289,7 +319,9 @@ public:
 
 			if (map[x][y] != Place::WALL && background[x][y] != Place::TRAP && map[x][y] != Place::INCREASEHP
 				&& !Eq(x, y, x_pos / 10, y_pos / 10) && !Eq(x, y, x_pos / 10 - 1, y_pos / 10 - 1)
-				&& !Eq(x, y, x_pos / 10 - 1, y_pos / 10) && !Eq(x, y, x_pos / 10, y_pos / 10 - 1))
+				&& !Eq(x, y, x_pos / 10 - 1, y_pos / 10) && !Eq(x, y, x_pos / 10, y_pos / 10 - 1)
+				&& !Eq(x, y, x_portal, y_portal) && !Eq(x, y, x_portal + 1, y_portal + 1)
+				&& !Eq(x, y, x_portal, y_portal + 1) && !Eq(x, y, x_portal + 1, y_portal))
 				map[x][y] = Place::INCREASEHP;
 			else i--;
 		}
@@ -306,7 +338,9 @@ public:
 
 			if (map[x][y] != Place::WALL && background[x][y] != Place::TRAP && map[x][y] != Place::INCREASEHP && map[x][y] != Place::IMPROVEBAG
 				&& !Eq(x, y, x_pos / 10, y_pos / 10) && !Eq(x, y, x_pos / 10 - 1, y_pos / 10 - 1)
-				&& !Eq(x, y, x_pos / 10 - 1, y_pos / 10) && !Eq(x, y, x_pos / 10, y_pos / 10 - 1))
+				&& !Eq(x, y, x_pos / 10 - 1, y_pos / 10) && !Eq(x, y, x_pos / 10, y_pos / 10 - 1)
+				&& !Eq(x, y, x_portal, y_portal) && !Eq(x, y, x_portal + 1, y_portal + 1)
+				&& !Eq(x, y, x_portal, y_portal + 1) && !Eq(x, y, x_portal + 1, y_portal))
 				map[x][y] = Place::IMPROVEBAG;
 			else i--;
 		}

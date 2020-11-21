@@ -172,6 +172,17 @@ void Game(sf::RenderWindow& window, Player &player)
             }
         }
 
+        if (player.GetXPosition() / 10 == Map.GetXPortal() + 1 && player.GetYPosition() / 10 == Map.GetYPortal() + 1)
+        {
+            Generating(window, player);
+            Game(window, player);
+        }
+
+        if (player.GetHealth() == 0)
+        {
+            Menu(window);
+        }
+
         window.clear();
         Map.DrawVision(window, player, Wall, Free, Trap);
         player.Draw(window);
