@@ -35,7 +35,13 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Structs.h">
+    <ClInclude Include="Constatnts.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Gameboard.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

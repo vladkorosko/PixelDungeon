@@ -1,4 +1,4 @@
-#include "Structs.h"
+#include "Constatnts.h"
 
 bool Eq(int x1, int y1, int x2, int y2)
 {

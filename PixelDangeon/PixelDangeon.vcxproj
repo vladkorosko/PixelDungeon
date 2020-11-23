@@ -157,7 +157,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Structs.h" />
+    <ClInclude Include="Constatnts.h" />
+    <ClInclude Include="Player.h" />
+    <ClInclude Include="Gameboard.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

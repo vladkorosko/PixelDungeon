@@ -1,4 +1,4 @@
-﻿#include"Structs.h"
+﻿#include "Gameboard.h"
 
 int main()
 {

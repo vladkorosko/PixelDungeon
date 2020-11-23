@@ -1,4 +1,4 @@
-#include "Structs.h"
+#include "Gameboard.h"
 
 void CheckCurrentPosition(GameBoard& Map, Player& player)
 {
