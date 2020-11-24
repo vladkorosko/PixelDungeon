@@ -152,19 +152,19 @@ void Game(sf::RenderWindow& window, Player &player)
                 }
             if (event.type == sf::Event::KeyPressed && (event.key.code == sf::Keyboard::Down || event.key.code == sf::Keyboard::S))
             {
-                Move(Map, player, 1);
+                Move(Map, player, 1, CheckCurrentPositionPlayer);
             }
             if (event.type == sf::Event::KeyPressed && (event.key.code == sf::Keyboard::Up || event.key.code == sf::Keyboard::W))
             {
-                Move(Map, player, 0);
+                Move(Map, player, 0, CheckCurrentPositionPlayer);
             }
             if (event.type == sf::Event::KeyPressed && (event.key.code == sf::Keyboard::Left || event.key.code == sf::Keyboard::A))
             {
-                Move(Map, player, 2);
+                Move(Map, player, 2, CheckCurrentPositionPlayer);
             }
             if (event.type == sf::Event::KeyPressed && (event.key.code == sf::Keyboard::Right || event.key.code == sf::Keyboard::D))
             {
-                Move(Map, player, 3);
+                Move(Map, player, 3, CheckCurrentPositionPlayer);
             }
             if (event.type == sf::Event::MouseButtonPressed && (event.mouseButton.button == sf::Mouse::Right))
             {

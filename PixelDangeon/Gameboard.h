@@ -61,7 +61,7 @@ public:
 		return y_portal;
 	}
 
-	void Draw(sf::RenderWindow& window)
+	void Draw(sf::RenderWindow& window) const
 	{
 		for (int i = 0; i < map.size(); i++)
 			for (int j = 0; j < map.size(); j++)
@@ -94,7 +94,7 @@ public:
 			}
 	}
 
-	void DrawVision(sf::RenderWindow& window, const Player& player, const sf::Color wall, const sf::Color free, const sf::Color trap)
+	void DrawVision(sf::RenderWindow& window, const Player& player, const sf::Color wall, const sf::Color free, const sf::Color trap) const
 	{
 		for (int i = 0; i < map.size(); i++)
 			for (int j = 0; j < map.size(); j++)
@@ -209,7 +209,9 @@ public:
 
 void Magic(int x, int y, Player& player, GameBoard& board);
 bool Exit();
-void Move(GameBoard &Map, Player& player, int key);
+void CheckCurrentPositionEnemy(GameBoard& Map, Enemy& enemy);
+void CheckCurrentPositionPlayer(GameBoard& Map, Enemy& player);
+void Move(GameBoard& Map, Enemy& enemy, int key, void(*CheckCurrentPosition)(GameBoard&, Enemy&));
 
 void Game(sf::RenderWindow& window, Player& p);
 void Menu(sf::RenderWindow &window);

@@ -3,47 +3,10 @@
 
 class Player: public Enemy
 {
-private:
-	int ammo;
-	int limit_ammo;
-
 public:
-	Player(int hp, int lim, int x_position, int y_position): Enemy(hp, x_position, y_position)
-	{
-		ammo = 10;
-		limit_ammo = lim;
-	}
+	Player(int hp, int lim, int x_position, int y_position) : Enemy(hp, lim, x_position, y_position) {}
 
-	void operator=(const Player& p)
-	{
-		this->health = p.health;
-		this->ammo = p.ammo;
-		this->limit_ammo = p.limit_ammo;
-		this->x_pos = p.x_pos;
-		this->y_pos = p.y_pos;
-	}
-
-	void SetAmmo(const int& ammo)
-	{
-		this->ammo = ammo;
-	}
-
-	int GetAmmo() const
-	{
-		return ammo;
-	}
-
-	void SetLimitAmmo(const int& limit_ammo)
-	{
-		this->limit_ammo = limit_ammo;
-	}
-
-	int GetLimitAmmo() const
-	{
-		return limit_ammo;
-	}
-
-	void DrawBody(sf::RenderWindow& window)
+	void DrawBody(sf::RenderWindow& window) const
 	{
 		sf::RectangleShape body;
 		body.setFillColor(sf::Color::Green);
@@ -56,7 +19,7 @@ public:
 		window.draw(body);
 	}
 
-	void DrawCharacteristics(sf::RenderWindow& window)
+	void DrawCharacteristics(sf::RenderWindow& window) const
 	{
 		sf::Text text1;
 		sf::Font font;

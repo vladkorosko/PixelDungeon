@@ -5,13 +5,17 @@ class Enemy
 {
 protected:
 	int health;
+	int ammo;
+	int limit_ammo;
 	int x_pos;
 	int y_pos;
 
 public:
-	Enemy(int hp, int x_position, int y_position)
+	Enemy(int hp, int lim, int x_position, int y_position)
 	{
 		health = hp;
+		ammo = lim/2;
+		limit_ammo = lim;
 		x_pos = x_position;
 		y_pos = y_position;
 	}
@@ -19,6 +23,8 @@ public:
 	void operator=(const Enemy& e)
 	{
 		this->health = e.health;
+		this->ammo = e.ammo;
+		this->limit_ammo = e.limit_ammo;
 		this->x_pos = e.x_pos;
 		this->y_pos = e.y_pos;
 	}
@@ -31,6 +37,27 @@ public:
 	int GetHealth() const
 	{
 		return health;
+	}
+
+
+	void SetAmmo(const int& ammo)
+	{
+		this->ammo = ammo;
+	}
+
+	int GetAmmo() const
+	{
+		return ammo;
+	}
+
+	void SetLimitAmmo(const int& limit_ammo)
+	{
+		this->limit_ammo = limit_ammo;
+	}
+
+	int GetLimitAmmo() const
+	{
+		return limit_ammo;
 	}
 
 	void SetXPosition(const int& x)
@@ -53,7 +80,7 @@ public:
 		return y_pos;
 	}
 
-	void DrawBody(sf::RenderWindow& window)
+	void DrawBody(sf::RenderWindow& window) const
 	{
 		sf::RectangleShape body;
 		body.setFillColor(sf::Color::Green);
@@ -66,7 +93,7 @@ public:
 		window.draw(body);
 	}
 
-	void DrawCharacteristics(sf::RenderWindow& window)
+	void DrawCharacteristics(sf::RenderWindow& window) const
 	{
 		sf::Text text1;
 		sf::Font font;
