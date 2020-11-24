@@ -6,11 +6,38 @@ class GameBoard
 private:
 	vector<vector<Place>> map;
 	vector<vector<Place>> background;
+	vector<Enemy> enemies;
 	int x_portal;
 	int y_portal;
 
+	bool CheckNotEnemyPosition(const int& x, const int& y) const
+	{
+		bool res = true;
+		for (auto i : enemies)
+		{
+			int x_pos = i.GetXPosition();
+			int y_pos = i.GetYPosition();
+			bool cur_res = !Eq(x, y, x_pos / 10, y_pos / 10) && !Eq(x, y, x_pos / 10 - 1, y_pos / 10 - 1)
+				&& !Eq(x, y, x_pos / 10 - 1, y_pos / 10) && !Eq(x, y, x_pos / 10, y_pos / 10 - 1);
+			res = cur_res && res;
+		}
+		return res;
+	}
+	
+	bool CheckPosition(const int& x, const int& y, const Player& p) const
+	{
+		int x_pos = p.GetXPosition();
+		int y_pos = p.GetYPosition();
+		return map[x][y] != Place::WALL && background[x][y] != Place::TRAP && map[x][y] != Place::INCREASEHP && map[x][y] != Place::IMPROVEBAG
+			&& !Eq(x, y, x_pos / 10, y_pos / 10) && !Eq(x, y, x_pos / 10 - 1, y_pos / 10 - 1)
+			&& !Eq(x, y, x_pos / 10 - 1, y_pos / 10) && !Eq(x, y, x_pos / 10, y_pos / 10 - 1)
+			&& !Eq(x, y, x_portal, y_portal) && !Eq(x, y, x_portal + 1, y_portal + 1)
+			&& !Eq(x, y, x_portal, y_portal + 1) && !Eq(x, y, x_portal + 1, y_portal)
+			&& CheckNotEnemyPosition(x,y);
+	}
+
 public:
-	GameBoard(int size)
+	GameBoard(int size, int numenemies)
 	{
 		vector<vector<Place>> s(size, (vector<Place>(size, Place::SPACE)));
 		background = s;
@@ -22,13 +49,26 @@ public:
 				s[i][size - 1] = Place::WALL;
 			}
 		map = s;
-		srand(time(NULL));
 		x_portal = rand() % (size - 3);
 		y_portal = rand() % (size - 3);
+		x_portal++;
+		y_portal++;
 		map[x_portal][y_portal] = Place::PORTAL;
 		map[x_portal + 1][y_portal] = Place::PORTAL;
 		map[x_portal][y_portal + 1] = Place::PORTAL;
 		map[x_portal + 1][y_portal + 1] = Place::PORTAL;
+		for (int i = 0; i < numenemies; i++)
+		{
+			int x_pos = rand() % (size - 3) + 2;
+			int y_pos = rand() % (size - 3) + 2;
+			int hp = rand() % 11 + 15;
+			if (CheckNotEnemyPosition(x_pos, y_pos) && CheckNotEnemyPosition(x_pos - 1, y_pos - 1)
+				&& CheckNotEnemyPosition(x_pos - 1, y_pos) && CheckNotEnemyPosition(x_pos, y_pos - 1)
+				&& !Eq(x_pos, y_pos, x_portal, y_portal) && !Eq(x_pos, y_pos, x_portal + 1, y_portal + 1)
+				&& !Eq(x_pos, y_pos, x_portal, y_portal + 1) && !Eq(x_pos, y_pos, x_portal + 1, y_portal))
+				enemies.push_back(Enemy(hp, 0, x_pos*10, y_pos*10));
+			else i--;
+		}
 	}
 
 	void SetMapElement(const int& x, const int& y, const Place& p)
@@ -92,6 +132,8 @@ public:
 				}
 				window.draw(body);
 			}
+		for (auto i : enemies)
+			i.DrawBody(window);
 	}
 
 	void DrawVision(sf::RenderWindow& window, const Player& player, const sf::Color wall, const sf::Color free, const sf::Color trap) const
@@ -128,6 +170,8 @@ public:
 					window.draw(body);
 				}
 			}
+		for (auto i : enemies)
+			i.DrawBody(window);
 	}
 
 	void AutoGenerateWalls(int number_of_walls, const Player& player)
@@ -139,11 +183,7 @@ public:
 			int x_pos = player.GetXPosition();
 			int y_pos = player.GetYPosition();
 
-			if (map[x][y] != Place::WALL
-				&& !Eq(x, y, x_pos / 10, y_pos / 10) && !Eq(x, y, x_pos / 10 - 1, y_pos / 10 - 1)
-				&& !Eq(x, y, x_pos / 10 - 1, y_pos / 10) && !Eq(x, y, x_pos / 10, y_pos / 10 - 1)
-				&& !Eq(x, y, x_portal, y_portal) && !Eq(x, y, x_portal + 1, y_portal + 1)
-				&& !Eq(x, y, x_portal, y_portal + 1) && !Eq(x, y, x_portal + 1, y_portal))
+			if (CheckPosition(x,y,player))
 				map[x][y] = Place::WALL;
 			else i--;
 		}
@@ -158,11 +198,7 @@ public:
 			int x_pos = player.GetXPosition();
 			int y_pos = player.GetYPosition();
 
-			if (map[x][y] != Place::WALL && background[x][y] != Place::TRAP
-				&& !Eq(x, y, x_pos / 10, y_pos / 10) && !Eq(x, y, x_pos / 10 - 1, y_pos / 10 - 1)
-				&& !Eq(x, y, x_pos / 10 - 1, y_pos / 10) && !Eq(x, y, x_pos / 10, y_pos / 10 - 1)
-				&& !Eq(x, y, x_portal, y_portal) && !Eq(x, y, x_portal + 1, y_portal + 1)
-				&& !Eq(x, y, x_portal, y_portal + 1) && !Eq(x, y, x_portal + 1, y_portal))
+			if (CheckPosition(x,y,player))
 				background[x][y] = Place::TRAP;
 			else i--;
 		}
@@ -177,11 +213,7 @@ public:
 			int x_pos = player.GetXPosition();
 			int y_pos = player.GetYPosition();
 
-			if (map[x][y] != Place::WALL && background[x][y] != Place::TRAP && map[x][y] != Place::INCREASEHP
-				&& !Eq(x, y, x_pos / 10, y_pos / 10) && !Eq(x, y, x_pos / 10 - 1, y_pos / 10 - 1)
-				&& !Eq(x, y, x_pos / 10 - 1, y_pos / 10) && !Eq(x, y, x_pos / 10, y_pos / 10 - 1)
-				&& !Eq(x, y, x_portal, y_portal) && !Eq(x, y, x_portal + 1, y_portal + 1)
-				&& !Eq(x, y, x_portal, y_portal + 1) && !Eq(x, y, x_portal + 1, y_portal))
+			if (CheckPosition(x,y,player))
 				map[x][y] = Place::INCREASEHP;
 			else i--;
 		}
@@ -196,11 +228,7 @@ public:
 			int x_pos = player.GetXPosition();
 			int y_pos = player.GetYPosition();
 
-			if (map[x][y] != Place::WALL && background[x][y] != Place::TRAP && map[x][y] != Place::INCREASEHP && map[x][y] != Place::IMPROVEBAG
-				&& !Eq(x, y, x_pos / 10, y_pos / 10) && !Eq(x, y, x_pos / 10 - 1, y_pos / 10 - 1)
-				&& !Eq(x, y, x_pos / 10 - 1, y_pos / 10) && !Eq(x, y, x_pos / 10, y_pos / 10 - 1)
-				&& !Eq(x, y, x_portal, y_portal) && !Eq(x, y, x_portal + 1, y_portal + 1)
-				&& !Eq(x, y, x_portal, y_portal + 1) && !Eq(x, y, x_portal + 1, y_portal))
+			if (CheckPosition(x,y,player))
 				map[x][y] = Place::IMPROVEBAG;
 			else i--;
 		}

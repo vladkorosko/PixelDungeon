@@ -58,7 +58,6 @@ void CheckCurrentPositionPlayer(GameBoard& Map, Enemy& player)
 
 	if (Map.GetMap()[x_pos / 10 - 1][y_pos / 10 - 1] == Place::IMPROVEBAG)
 	{
-		srand(time(NULL));
 		int diff = rand() % 7 - 2;
 		int new_lim = player.GetLimitAmmo() + diff;
 		int new_ammo = player.GetAmmo() + diff;
@@ -73,7 +72,6 @@ void CheckCurrentPositionPlayer(GameBoard& Map, Enemy& player)
 
 	if (Map.GetMap()[x_pos / 10][y_pos / 10 - 1] == Place::IMPROVEBAG)
 	{
-		srand(time(NULL));
 		int diff = rand() % 7 - 2;
 		int new_lim = player.GetLimitAmmo() + diff;
 		int new_ammo = player.GetAmmo() + diff;
@@ -88,7 +86,6 @@ void CheckCurrentPositionPlayer(GameBoard& Map, Enemy& player)
 
 	if (Map.GetMap()[x_pos / 10][y_pos / 10] == Place::IMPROVEBAG)
 	{
-		srand(time(NULL));
 		int diff = rand() % 7 - 2;
 		int new_lim = player.GetLimitAmmo() + diff;
 		int new_ammo = player.GetAmmo() + diff;
@@ -103,7 +100,6 @@ void CheckCurrentPositionPlayer(GameBoard& Map, Enemy& player)
 
 	if (Map.GetMap()[x_pos / 10 - 1][y_pos / 10] == Place::IMPROVEBAG)
 	{
-		srand(time(NULL));
 		int diff = rand() % 7 - 2;
 		int new_lim = player.GetLimitAmmo() + diff;
 		int new_ammo = player.GetAmmo() + diff;

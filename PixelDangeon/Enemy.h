@@ -83,11 +83,11 @@ public:
 	void DrawBody(sf::RenderWindow& window) const
 	{
 		sf::RectangleShape body;
-		body.setFillColor(sf::Color::Green);
+		body.setFillColor(sf::Color::Color(101, 67, 33, 255));
 		body.setSize(sf::Vector2f(20, 20));
 		body.setPosition(x_pos - 10, y_pos - 10);
 		window.draw(body);
-		body.setFillColor(sf::Color::Color(101, 67, 33, 255));
+		body.setFillColor(sf::Color::Green);
 		body.setSize(sf::Vector2f(10, 10));
 		body.setPosition(x_pos - 5, y_pos - 5);
 		window.draw(body);

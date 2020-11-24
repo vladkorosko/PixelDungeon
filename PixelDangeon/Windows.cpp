@@ -133,8 +133,7 @@ Player Generating(sf::RenderWindow& window, Player p = Player(100,20,30,30))
 
 void Game(sf::RenderWindow& window, Player &player)
 {
-    srand(time(NULL));
-    GameBoard Map(window.getSize().y/10);
+    GameBoard Map(window.getSize().y/10, 10);
     Map.AutoGenerateWalls(1000, player);
     Map.AutoGenerateTraps(100, player);
     Map.AutoGenerateBonusHealth(50, player);
@@ -280,7 +279,7 @@ void Menu(sf::RenderWindow& window)
 
         window.draw(option);
         window.draw(text1);
-
+        
         option.setPosition(200, 250);
         text2.setString("Continue");
         text2.setPosition(410, 260);
