@@ -185,7 +185,8 @@ void Game(sf::RenderWindow& window, Player &player)
 
         window.clear();
         Map.DrawVision(window, player, Wall, Free, Trap);
-        player.Draw(window);
+        player.DrawBody(window);
+        player.DrawCharacteristics(window);
 
         window.display();
     }

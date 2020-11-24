@@ -1,46 +1,56 @@
-#pragma once
-#include "Enemy.h"
+#pragma 
+#include "Constatnts.h"
 
-class Player: public Enemy
+class Enemy
 {
-private:
-	int ammo;
-	int limit_ammo;
+protected:
+	int health;
+	int x_pos;
+	int y_pos;
 
 public:
-	Player(int hp, int lim, int x_position, int y_position): Enemy(hp, x_position, y_position)
+	Enemy(int hp, int x_position, int y_position)
 	{
-		ammo = 10;
-		limit_ammo = lim;
+		health = hp;
+		x_pos = x_position;
+		y_pos = y_position;
 	}
 
-	void operator=(const Player& p)
+	void operator=(const Enemy& e)
 	{
-		this->health = p.health;
-		this->ammo = p.ammo;
-		this->limit_ammo = p.limit_ammo;
-		this->x_pos = p.x_pos;
-		this->y_pos = p.y_pos;
+		this->health = e.health;
+		this->x_pos = e.x_pos;
+		this->y_pos = e.y_pos;
 	}
 
-	void SetAmmo(const int& ammo)
+	void SetHealth(const int& hp)
 	{
-		this->ammo = ammo;
+		this->health = hp;
 	}
 
-	int GetAmmo() const
+	int GetHealth() const
 	{
-		return ammo;
+		return health;
 	}
 
-	void SetLimitAmmo(const int& limit_ammo)
+	void SetXPosition(const int& x)
 	{
-		this->limit_ammo = limit_ammo;
+		this->x_pos = x;
 	}
 
-	int GetLimitAmmo() const
+	int GetXPosition() const
 	{
-		return limit_ammo;
+		return x_pos;
+	}
+
+	void SetYPosition(const int& y)
+	{
+		this->y_pos = y;
+	}
+
+	int GetYPosition() const
+	{
+		return y_pos;
 	}
 
 	void DrawBody(sf::RenderWindow& window)
@@ -67,11 +77,6 @@ public:
 		text1.setStyle(sf::Text::Bold);
 		text1.setString(to_string(health));
 		text1.setPosition(window.getSize().y, 25);
-		window.draw(text1);
-
-		text1.setFillColor(sf::Color::Red);
-		text1.setString(to_string(ammo) + " (max: " + to_string(limit_ammo) + ")");
-		text1.setPosition(window.getSize().y, 50);
 		window.draw(text1);
 	}
 };
