@@ -148,6 +148,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Addition.cpp" />
+    <ClCompile Include="AI.cpp" />
     <ClCompile Include="cheats.cpp" />
     <ClCompile Include="Moving.cpp" />
     <ClCompile Include="PixelDangeon.cpp" />

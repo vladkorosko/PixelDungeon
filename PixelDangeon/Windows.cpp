@@ -133,7 +133,7 @@ Player Generating(sf::RenderWindow& window, Player p = Player(100,20,30,30))
 
 void Game(sf::RenderWindow& window, Player &player)
 {
-    GameBoard Map(window.getSize().y/10, 10);
+    GameBoard Map(window.getSize().y/10, 1);
     Map.AutoGenerateWalls(1000, player);
     Map.AutoGenerateTraps(100, player);
     Map.AutoGenerateBonusHealth(50, player);
@@ -152,22 +152,52 @@ void Game(sf::RenderWindow& window, Player &player)
             if (event.type == sf::Event::KeyPressed && (event.key.code == sf::Keyboard::Down || event.key.code == sf::Keyboard::S))
             {
                 Move(Map, player, 1, CheckCurrentPositionPlayer);
+                for (int i = 0; i < Map.GetEnemies().size(); i++)
+                {
+                    Enemy new_e = Map.GetEnemies()[i];
+                    Move(Map, new_e, AI(Map, player, new_e), CheckCurrentPositionEnemy);
+                    Map.SetEnemyIndex(new_e, i);
+                }
             }
             if (event.type == sf::Event::KeyPressed && (event.key.code == sf::Keyboard::Up || event.key.code == sf::Keyboard::W))
             {
                 Move(Map, player, 0, CheckCurrentPositionPlayer);
+                for (int i = 0; i < Map.GetEnemies().size(); i++)
+                {
+                    Enemy new_e = Map.GetEnemies()[i];
+                    Move(Map, new_e, AI(Map, player, new_e), CheckCurrentPositionEnemy);
+                    Map.SetEnemyIndex(new_e, i);
+                }
             }
             if (event.type == sf::Event::KeyPressed && (event.key.code == sf::Keyboard::Left || event.key.code == sf::Keyboard::A))
             {
                 Move(Map, player, 2, CheckCurrentPositionPlayer);
+                for (int i =0 ;i < Map.GetEnemies().size();i++)
+                {
+                    Enemy new_e = Map.GetEnemies()[i];
+                    Move(Map, new_e, AI(Map, player, new_e), CheckCurrentPositionEnemy);
+                    Map.SetEnemyIndex(new_e, i);
+                }
             }
             if (event.type == sf::Event::KeyPressed && (event.key.code == sf::Keyboard::Right || event.key.code == sf::Keyboard::D))
             {
                 Move(Map, player, 3, CheckCurrentPositionPlayer);
+                for (int i = 0; i < Map.GetEnemies().size(); i++)
+                {
+                    Enemy new_e = Map.GetEnemies()[i];
+                    Move(Map, new_e, AI(Map, player, new_e), CheckCurrentPositionEnemy);
+                    Map.SetEnemyIndex(new_e, i);
+                }
             }
             if (event.type == sf::Event::MouseButtonPressed && (event.mouseButton.button == sf::Mouse::Right))
             {
                 Magic(event.mouseButton.x, event.mouseButton.y, player, Map);
+                for (int i = 0; i < Map.GetEnemies().size(); i++)
+                {
+                    Enemy new_e = Map.GetEnemies()[i];
+                    Move(Map, new_e, AI(Map, player, new_e), CheckCurrentPositionEnemy);
+                    Map.SetEnemyIndex(new_e, i);
+                }
             }
         }
 
@@ -183,7 +213,7 @@ void Game(sf::RenderWindow& window, Player &player)
         }
 
         window.clear();
-        Map.DrawVision(window, player, Wall, Free, Trap);
+        Map.DrawVisionUpdated(window, player);
         player.DrawBody(window);
         player.DrawCharacteristics(window);
 

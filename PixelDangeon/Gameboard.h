@@ -23,7 +23,7 @@ private:
 		}
 		return res;
 	}
-	
+
 	bool CheckPosition(const int& x, const int& y, const Player& p) const
 	{
 		int x_pos = p.GetXPosition();
@@ -33,7 +33,7 @@ private:
 			&& !Eq(x, y, x_pos / 10 - 1, y_pos / 10) && !Eq(x, y, x_pos / 10, y_pos / 10 - 1)
 			&& !Eq(x, y, x_portal, y_portal) && !Eq(x, y, x_portal + 1, y_portal + 1)
 			&& !Eq(x, y, x_portal, y_portal + 1) && !Eq(x, y, x_portal + 1, y_portal)
-			&& CheckNotEnemyPosition(x,y);
+			&& CheckNotEnemyPosition(x, y);
 	}
 
 public:
@@ -42,12 +42,12 @@ public:
 		vector<vector<Place>> s(size, (vector<Place>(size, Place::SPACE)));
 		background = s;
 		for (int i = 0; i < size; i++)
-			{
-				s[0][i] = Place::WALL;
-				s[size - 1][i] = Place::WALL;
-				s[i][0] = Place::WALL;
-				s[i][size - 1] = Place::WALL;
-			}
+		{
+			s[0][i] = Place::WALL;
+			s[size - 1][i] = Place::WALL;
+			s[i][0] = Place::WALL;
+			s[i][size - 1] = Place::WALL;
+		}
 		map = s;
 		x_portal = rand() % (size - 3);
 		y_portal = rand() % (size - 3);
@@ -66,7 +66,7 @@ public:
 				&& CheckNotEnemyPosition(x_pos - 1, y_pos) && CheckNotEnemyPosition(x_pos, y_pos - 1)
 				&& !Eq(x_pos, y_pos, x_portal, y_portal) && !Eq(x_pos, y_pos, x_portal + 1, y_portal + 1)
 				&& !Eq(x_pos, y_pos, x_portal, y_portal + 1) && !Eq(x_pos, y_pos, x_portal + 1, y_portal))
-				enemies.push_back(Enemy(hp, 0, x_pos*10, y_pos*10));
+				enemies.push_back(Enemy(hp, 0, x_pos * 10, y_pos * 10));
 			else i--;
 		}
 	}
@@ -101,6 +101,16 @@ public:
 		return y_portal;
 	}
 
+	void SetEnemyIndex(const Enemy& e, int index)
+	{
+		enemies[index] = e;
+	}
+
+	vector<Enemy> GetEnemies() const
+	{
+		return enemies;
+	}
+
 	void Draw(sf::RenderWindow& window) const
 	{
 		for (int i = 0; i < map.size(); i++)
@@ -108,7 +118,7 @@ public:
 			{
 				sf::RectangleShape body;
 				body.setSize(sf::Vector2f(10, 10));
-				body.setPosition(i*10, j*10);
+				body.setPosition(i * 10, j * 10);
 				switch (map[i][j])
 				{
 				case 0:
@@ -135,13 +145,13 @@ public:
 		for (auto i : enemies)
 			i.DrawBody(window);
 	}
-
+	/*
 	void DrawVision(sf::RenderWindow& window, const Player& player, const sf::Color wall, const sf::Color free, const sf::Color trap) const
 	{
 		for (int i = 0; i < map.size(); i++)
 			for (int j = 0; j < map.size(); j++)
 			{
-				if (abs(10 * i - player.GetXPosition()+5) + abs(j * 10  - player.GetYPosition()+5) <= 50)
+				if (abs(10 * i - player.GetXPosition() + 5) + abs(j * 10 - player.GetYPosition() + 5) <= 50)
 				{
 					sf::RectangleShape body;
 					body.setSize(sf::Vector2f(10, 10));
@@ -168,6 +178,49 @@ public:
 						break;
 					}
 					window.draw(body);
+				}
+			}
+		for (auto i : enemies)
+			i.DrawBody(window);
+	}*/
+
+	void DrawVisionUpdated(sf::RenderWindow& window, Player& p)
+	{
+		for (int i = -5; i < 5; i++)
+			for (int j = -5; j < 5; j++)
+			{
+				if (i + j > -7 && i + j < 5 && i - j < 6 && i - j >-6)
+				{
+					int x_pos = i + p.GetXPosition() / 10;
+					int y_pos = j + p.GetYPosition() / 10;
+					if (x_pos > 0 && y_pos > 0 && x_pos < map.size() && y_pos < map.size())
+					{
+						sf::RectangleShape body;
+						body.setSize(sf::Vector2f(10, 10));
+						body.setPosition(x_pos * 10, y_pos * 10);
+						switch (map[x_pos][y_pos])
+						{
+						case 0:
+							body.setFillColor(Wall);
+							break;
+						case 1:
+							body.setFillColor(Free);
+							break;
+						case 2:
+							body.setFillColor(Trap);
+							break;
+						case 3:
+							body.setFillColor(IncreaseHP);
+							break;
+						case 4:
+							body.setFillColor(ImproveBag);
+							break;
+						default:
+							body.setFillColor(Portal);
+							break;
+						}
+						window.draw(body);
+					}
 				}
 			}
 		for (auto i : enemies)
@@ -240,6 +293,7 @@ bool Exit();
 void CheckCurrentPositionEnemy(GameBoard& Map, Enemy& enemy);
 void CheckCurrentPositionPlayer(GameBoard& Map, Enemy& player);
 void Move(GameBoard& Map, Enemy& enemy, int key, void(*CheckCurrentPosition)(GameBoard&, Enemy&));
+int AI(const GameBoard& map, const Player& player, const Enemy& e);
 
 void Game(sf::RenderWindow& window, Player& p);
 void Menu(sf::RenderWindow &window);
