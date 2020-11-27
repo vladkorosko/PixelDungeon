@@ -1,6 +1,6 @@
 #include "Gameboard.h"
 
-void CheckCurrentPositionPlayer(GameBoard& Map, Enemy& player)
+void CheckCurrentPositionPlayer(GameBoard& Map, Player& player)
 {
 	int x_pos = player.GetXPosition();
 	int y_pos = player.GetYPosition();
@@ -146,7 +146,7 @@ void CheckCurrentPositionEnemy(GameBoard& Map, Enemy& enemy)
 	}
 }
 
-void Move(GameBoard &Map, Enemy &enemy, int key, void(*CheckCurrentPosition)(GameBoard&, Enemy&))
+void MovePlayer(GameBoard &Map, Player& enemy, int key)
 {
 	int x_pos = enemy.GetXPosition();
 	int y_pos = enemy.GetYPosition();
@@ -157,7 +157,7 @@ void Move(GameBoard &Map, Enemy &enemy, int key, void(*CheckCurrentPosition)(Gam
 		{
 			y_pos -= 10;
 			enemy.SetYPosition(y_pos);
-			CheckCurrentPosition(Map, enemy);
+			CheckCurrentPositionPlayer(Map, enemy);
 		}
 		break;
 	case 1:
@@ -165,7 +165,7 @@ void Move(GameBoard &Map, Enemy &enemy, int key, void(*CheckCurrentPosition)(Gam
 		{
 			y_pos += 10;
 			enemy.SetYPosition(y_pos);
-			CheckCurrentPosition(Map, enemy);
+			CheckCurrentPositionPlayer(Map, enemy);
 		}
 		break;
 	case 2:
@@ -173,7 +173,7 @@ void Move(GameBoard &Map, Enemy &enemy, int key, void(*CheckCurrentPosition)(Gam
 		{
 			x_pos -= 10;
 			enemy.SetXPosition(x_pos);
-			CheckCurrentPosition(Map, enemy);
+			CheckCurrentPositionPlayer(Map, enemy);
 		}
 		break;
 	case 3:
@@ -181,7 +181,50 @@ void Move(GameBoard &Map, Enemy &enemy, int key, void(*CheckCurrentPosition)(Gam
 		{
 			x_pos += 10;
 			enemy.SetXPosition(x_pos);
-			CheckCurrentPosition(Map, enemy);
+			CheckCurrentPositionPlayer(Map, enemy);
+		}
+		break;
+	default:
+		break;
+	}
+}
+
+void MoveEnemy(GameBoard& Map, Enemy& enemy, Player& p, int key)
+{
+	int x_pos = enemy.GetXPosition();
+	int y_pos = enemy.GetYPosition();
+	switch (key)
+	{
+	case 0:
+		if (Map.GetMap()[x_pos / 10][y_pos / 10 - 2] && Map.GetMap()[x_pos / 10 - 1][y_pos / 10 - 2])
+		{
+			y_pos -= 10;
+			enemy.SetYPosition(y_pos);
+			CheckCurrentPositionEnemy(Map, enemy);
+		}
+		break;
+	case 1:
+		if (Map.GetMap()[x_pos / 10][y_pos / 10 + 1] && Map.GetMap()[x_pos / 10 - 1][y_pos / 10 + 1])
+		{
+			y_pos += 10;
+			enemy.SetYPosition(y_pos);
+			CheckCurrentPositionEnemy(Map, enemy);
+		}
+		break;
+	case 2:
+		if (Map.GetMap()[x_pos / 10 - 2][y_pos / 10] && Map.GetMap()[x_pos / 10 - 2][y_pos / 10 - 1])
+		{
+			x_pos -= 10;
+			enemy.SetXPosition(x_pos);
+			CheckCurrentPositionEnemy(Map, enemy);
+		}
+		break;
+	case 3:
+		if (Map.GetMap()[x_pos / 10 + 1][y_pos / 10] && Map.GetMap()[x_pos / 10 + 1][y_pos / 10 - 1])
+		{
+			x_pos += 10;
+			enemy.SetXPosition(x_pos);
+			CheckCurrentPositionEnemy(Map, enemy);
 		}
 		break;
 	default:

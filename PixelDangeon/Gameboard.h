@@ -145,44 +145,6 @@ public:
 		for (auto i : enemies)
 			i.DrawBody(window);
 	}
-	/*
-	void DrawVision(sf::RenderWindow& window, const Player& player, const sf::Color wall, const sf::Color free, const sf::Color trap) const
-	{
-		for (int i = 0; i < map.size(); i++)
-			for (int j = 0; j < map.size(); j++)
-			{
-				if (abs(10 * i - player.GetXPosition() + 5) + abs(j * 10 - player.GetYPosition() + 5) <= 50)
-				{
-					sf::RectangleShape body;
-					body.setSize(sf::Vector2f(10, 10));
-					body.setPosition(i * 10, j * 10);
-					switch (map[i][j])
-					{
-					case 0:
-						body.setFillColor(wall);
-						break;
-					case 1:
-						body.setFillColor(free);
-						break;
-					case 2:
-						body.setFillColor(trap);
-						break;
-					case 3:
-						body.setFillColor(IncreaseHP);
-						break;
-					case 4:
-						body.setFillColor(ImproveBag);
-						break;
-					default:
-						body.setFillColor(Portal);
-						break;
-					}
-					window.draw(body);
-				}
-			}
-		for (auto i : enemies)
-			i.DrawBody(window);
-	}*/
 
 	void DrawVisionUpdated(sf::RenderWindow& window, Player& p)
 	{
@@ -193,7 +155,7 @@ public:
 				{
 					int x_pos = i + p.GetXPosition() / 10;
 					int y_pos = j + p.GetYPosition() / 10;
-					if (x_pos > 0 && y_pos > 0 && x_pos < map.size() && y_pos < map.size())
+					if (x_pos >= 0 && y_pos >= 0 && x_pos < map.size() && y_pos < map.size())
 					{
 						sf::RectangleShape body;
 						body.setSize(sf::Vector2f(10, 10));
@@ -290,9 +252,8 @@ public:
 
 void Magic(int x, int y, Player& player, GameBoard& board);
 bool Exit();
-void CheckCurrentPositionEnemy(GameBoard& Map, Enemy& enemy);
-void CheckCurrentPositionPlayer(GameBoard& Map, Enemy& player);
-void Move(GameBoard& Map, Enemy& enemy, int key, void(*CheckCurrentPosition)(GameBoard&, Enemy&));
+void MovePlayer(GameBoard& Map, Player& enemy, int key);
+void MoveEnemy(GameBoard& Map, Enemy& enemy, Player& p, int key);
 int AI(const GameBoard& map, const Player& player, const Enemy& e);
 
 void Game(sf::RenderWindow& window, Player& p);

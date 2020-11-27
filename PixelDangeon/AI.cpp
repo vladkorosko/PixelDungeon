@@ -1,5 +1,5 @@
 #include "Gameboard.h"
-
+/*
 int AI(const GameBoard& map, const Player& player, const Enemy& e)
 {
 	for (int i = -5; i < 5; i++)
@@ -31,4 +31,11 @@ int AI(const GameBoard& map, const Player& player, const Enemy& e)
 			}
 		}
 	return 4;
+}
+*/
+int AI(const GameBoard& map, const Player& player, const Enemy& e)
+{
+	int x = player.GetXPosition() - e.GetXPosition();
+	int y = player.GetYPosition() - e.GetYPosition();
+	return 1;
 }
