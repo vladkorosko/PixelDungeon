@@ -10,6 +10,19 @@ private:
 	int x_portal;
 	int y_portal;
 
+	bool CheckPosition(const int& x, const int& y, const Player& p) const
+	{
+		int x_pos = p.GetXPosition();
+		int y_pos = p.GetYPosition();
+		return map[x][y] != Place::WALL && background[x][y] != Place::TRAP && map[x][y] != Place::INCREASEHP && map[x][y] != Place::IMPROVEBAG
+			&& !Eq(x, y, x_pos / 10, y_pos / 10) && !Eq(x, y, x_pos / 10 - 1, y_pos / 10 - 1)
+			&& !Eq(x, y, x_pos / 10 - 1, y_pos / 10) && !Eq(x, y, x_pos / 10, y_pos / 10 - 1)
+			&& !Eq(x, y, x_portal, y_portal) && !Eq(x, y, x_portal + 1, y_portal + 1)
+			&& !Eq(x, y, x_portal, y_portal + 1) && !Eq(x, y, x_portal + 1, y_portal)
+			&& CheckNotEnemyPosition(x, y);
+	}
+
+public:
 	bool CheckNotEnemyPosition(const int& x, const int& y) const
 	{
 		bool res = true;
@@ -24,19 +37,6 @@ private:
 		return res;
 	}
 
-	bool CheckPosition(const int& x, const int& y, const Player& p) const
-	{
-		int x_pos = p.GetXPosition();
-		int y_pos = p.GetYPosition();
-		return map[x][y] != Place::WALL && background[x][y] != Place::TRAP && map[x][y] != Place::INCREASEHP && map[x][y] != Place::IMPROVEBAG
-			&& !Eq(x, y, x_pos / 10, y_pos / 10) && !Eq(x, y, x_pos / 10 - 1, y_pos / 10 - 1)
-			&& !Eq(x, y, x_pos / 10 - 1, y_pos / 10) && !Eq(x, y, x_pos / 10, y_pos / 10 - 1)
-			&& !Eq(x, y, x_portal, y_portal) && !Eq(x, y, x_portal + 1, y_portal + 1)
-			&& !Eq(x, y, x_portal, y_portal + 1) && !Eq(x, y, x_portal + 1, y_portal)
-			&& CheckNotEnemyPosition(x, y);
-	}
-
-public:
 	GameBoard(int size, int numenemies)
 	{
 		vector<vector<Place>> s(size, (vector<Place>(size, Place::SPACE)));
@@ -148,17 +148,19 @@ public:
 
 	void DrawVisionUpdated(sf::RenderWindow& window, Player& p)
 	{
+		int x_p = p.GetXPosition();
+		int y_p = p.GetYPosition();
+		sf::RectangleShape body;
+		body.setSize(sf::Vector2f(10, 10));
 		for (int i = -5; i < 5; i++)
 			for (int j = -5; j < 5; j++)
 			{
 				if (i + j > -7 && i + j < 5 && i - j < 6 && i - j >-6)
 				{
-					int x_pos = i + p.GetXPosition() / 10;
-					int y_pos = j + p.GetYPosition() / 10;
+					int x_pos = i + x_p / 10;
+					int y_pos = j + y_p / 10;
 					if (x_pos >= 0 && y_pos >= 0 && x_pos < map.size() && y_pos < map.size())
 					{
-						sf::RectangleShape body;
-						body.setSize(sf::Vector2f(10, 10));
 						body.setPosition(x_pos * 10, y_pos * 10);
 						switch (map[x_pos][y_pos])
 						{
@@ -186,7 +188,32 @@ public:
 				}
 			}
 		for (auto i : enemies)
+		{
+			int x_e = i.GetXPosition();
+			int y_e = i.GetYPosition();
+			body.setFillColor(sf::Color::Black);
 			i.DrawBody(window);
+			if (abs(x_p - x_e - 5) + abs(y_p - y_e - 5) > 55)
+			{
+				body.setPosition(x_e, y_e);
+				window.draw(body);
+			}
+			if (abs(x_p - x_e + 5) + abs(y_p - y_e - 5) > 55)
+			{
+				body.setPosition(x_e - 10, y_e);
+				window.draw(body);
+			}
+			if (abs(x_p - x_e - 5) + abs(y_p - y_e + 5) > 55)
+			{
+				body.setPosition(x_e, y_e - 10);
+				window.draw(body);
+			}
+			if (abs(x_p - x_e + 5) + abs(y_p - y_e + 5) > 55)
+			{
+				body.setPosition(x_e - 10, y_e - 10);
+				window.draw(body);
+			}
+		}
 	}
 
 	void AutoGenerateWalls(int number_of_walls, const Player& player)

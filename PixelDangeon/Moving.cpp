@@ -119,31 +119,57 @@ void CheckCurrentPositionEnemy(GameBoard& Map, Enemy& enemy)
 	int y_pos = enemy.GetYPosition();
 	if (Map.GetBackGround()[x_pos / 10 - 1][y_pos / 10 - 1] == Place::TRAP)
 	{
-		enemy.SetHealth(enemy.GetHealth() - 10);
 		Map.SetMapElement(x_pos / 10 - 1, y_pos / 10 - 1, Map.GetBackGround()[x_pos / 10 - 1][y_pos / 10 - 1]);
 		Map.SetBackGroundElement(x_pos / 10 - 1, y_pos / 10 - 1, Place::SPACE);
 	}
 
 	if (Map.GetBackGround()[x_pos / 10][y_pos / 10 - 1] == Place::TRAP)
 	{
-		enemy.SetHealth(enemy.GetHealth() - 10);
 		Map.SetMapElement(x_pos / 10, y_pos / 10 - 1, Map.GetBackGround()[x_pos / 10][y_pos / 10 - 1]);
 		Map.SetBackGroundElement(x_pos / 10, y_pos / 10 - 1, Place::SPACE);
 	}
 
 	if (Map.GetBackGround()[x_pos / 10][y_pos / 10] == Place::TRAP)
 	{
-		enemy.SetHealth(enemy.GetHealth() - 10);
 		Map.SetMapElement(x_pos / 10, y_pos / 10, Map.GetBackGround()[x_pos / 10][y_pos / 10]);
 		Map.SetBackGroundElement(x_pos / 10, y_pos / 10, Place::SPACE);
 	}
 
 	if (Map.GetBackGround()[x_pos / 10 - 1][y_pos / 10] == Place::TRAP)
 	{
-		enemy.SetHealth(enemy.GetHealth() - 10);
 		Map.SetMapElement(x_pos / 10 - 1, y_pos / 10, Map.GetBackGround()[x_pos / 10 - 1][y_pos / 10]);
 		Map.SetBackGroundElement(x_pos / 10 - 1, y_pos / 10, Place::SPACE);
 	}
+}
+
+bool CheckNextPositionPlayer(const GameBoard& Map, Player& p, int x1, int y1, int x2, int y2)
+{
+	if (!Map.CheckNotEnemyPosition(x1/10, y1/10) || !Map.CheckNotEnemyPosition(x2/10, y2/10))
+	{
+		p.SetHealth(p.GetHealth() - rand() % 10);
+		return false;
+	}
+	return true;
+}
+
+bool CheckNextPositionEnemy(const GameBoard& Map, Player& p, int x1, int y1, int x2, int y2)
+{
+	int x_pos = p.GetXPosition();
+	int y_pos = p.GetYPosition();
+	if (Eq(x_pos, y_pos, x1, y1) || Eq(x_pos - 10, y_pos - 10, x1, y1) ||
+		Eq(x_pos - 10, y_pos, x1, y1) || Eq(x_pos, y_pos - 10, x1, y1) ||
+		Eq(x_pos, y_pos, x2, y2) || Eq(x_pos - 10, y_pos - 10, x2, y2) ||
+		Eq(x_pos - 10, y_pos, x2, y2) || Eq(x_pos, y_pos - 10, x2, y2))
+	{
+		p.SetHealth(p.GetHealth() - rand() % 10);
+		return false;
+	}
+
+	if (!Map.CheckNotEnemyPosition(x1, y1) || !Map.CheckNotEnemyPosition(x2, y2))
+	{
+		return false;
+	}
+	return true;
 }
 
 void MovePlayer(GameBoard &Map, Player& enemy, int key)
@@ -153,7 +179,8 @@ void MovePlayer(GameBoard &Map, Player& enemy, int key)
 	switch (key)
 	{
 	case 0:
-		if (Map.GetMap()[x_pos / 10][y_pos / 10 - 2] && Map.GetMap()[x_pos / 10 - 1][y_pos / 10 - 2])
+		if (Map.GetMap()[x_pos / 10][y_pos / 10 - 2] && Map.GetMap()[x_pos / 10 - 1][y_pos / 10 - 2] 
+			&& CheckNextPositionPlayer(Map, enemy, x_pos-10, y_pos-20,x_pos,y_pos-20))
 		{
 			y_pos -= 10;
 			enemy.SetYPosition(y_pos);
@@ -161,7 +188,8 @@ void MovePlayer(GameBoard &Map, Player& enemy, int key)
 		}
 		break;
 	case 1:
-		if (Map.GetMap()[x_pos / 10][y_pos / 10 + 1] && Map.GetMap()[x_pos / 10 - 1][y_pos / 10 + 1])
+		if (Map.GetMap()[x_pos / 10][y_pos / 10 + 1] && Map.GetMap()[x_pos / 10 - 1][y_pos / 10 + 1]
+			&& CheckNextPositionPlayer(Map, enemy, x_pos - 10, y_pos + 10, x_pos, y_pos + 10))
 		{
 			y_pos += 10;
 			enemy.SetYPosition(y_pos);
@@ -169,7 +197,8 @@ void MovePlayer(GameBoard &Map, Player& enemy, int key)
 		}
 		break;
 	case 2:
-		if (Map.GetMap()[x_pos / 10 - 2][y_pos / 10] && Map.GetMap()[x_pos / 10 - 2][y_pos / 10 - 1])
+		if (Map.GetMap()[x_pos / 10 - 2][y_pos / 10] && Map.GetMap()[x_pos / 10 - 2][y_pos / 10 - 1]
+			&& CheckNextPositionPlayer(Map, enemy, x_pos - 20, y_pos - 10, x_pos-20, y_pos))
 		{
 			x_pos -= 10;
 			enemy.SetXPosition(x_pos);
@@ -177,7 +206,8 @@ void MovePlayer(GameBoard &Map, Player& enemy, int key)
 		}
 		break;
 	case 3:
-		if (Map.GetMap()[x_pos / 10 + 1][y_pos / 10] && Map.GetMap()[x_pos / 10 + 1][y_pos / 10 - 1])
+		if (Map.GetMap()[x_pos / 10 + 1][y_pos / 10] && Map.GetMap()[x_pos / 10 + 1][y_pos / 10 - 1]
+			&& CheckNextPositionPlayer(Map, enemy, x_pos + 10, y_pos - 10, x_pos + 10, y_pos))
 		{
 			x_pos += 10;
 			enemy.SetXPosition(x_pos);
@@ -196,7 +226,8 @@ void MoveEnemy(GameBoard& Map, Enemy& enemy, Player& p, int key)
 	switch (key)
 	{
 	case 0:
-		if (Map.GetMap()[x_pos / 10][y_pos / 10 - 2] && Map.GetMap()[x_pos / 10 - 1][y_pos / 10 - 2])
+		if (Map.GetMap()[x_pos / 10][y_pos / 10 - 2] && Map.GetMap()[x_pos / 10 - 1][y_pos / 10 - 2]
+			&& CheckNextPositionEnemy(Map, p, x_pos - 10, y_pos - 20, x_pos, y_pos - 20))
 		{
 			y_pos -= 10;
 			enemy.SetYPosition(y_pos);
@@ -204,7 +235,8 @@ void MoveEnemy(GameBoard& Map, Enemy& enemy, Player& p, int key)
 		}
 		break;
 	case 1:
-		if (Map.GetMap()[x_pos / 10][y_pos / 10 + 1] && Map.GetMap()[x_pos / 10 - 1][y_pos / 10 + 1])
+		if (Map.GetMap()[x_pos / 10][y_pos / 10 + 1] && Map.GetMap()[x_pos / 10 - 1][y_pos / 10 + 1]
+			&& CheckNextPositionEnemy(Map, p, x_pos - 10, y_pos + 10, x_pos, y_pos + 10))
 		{
 			y_pos += 10;
 			enemy.SetYPosition(y_pos);
@@ -212,7 +244,8 @@ void MoveEnemy(GameBoard& Map, Enemy& enemy, Player& p, int key)
 		}
 		break;
 	case 2:
-		if (Map.GetMap()[x_pos / 10 - 2][y_pos / 10] && Map.GetMap()[x_pos / 10 - 2][y_pos / 10 - 1])
+		if (Map.GetMap()[x_pos / 10 - 2][y_pos / 10] && Map.GetMap()[x_pos / 10 - 2][y_pos / 10 - 1]
+			&& CheckNextPositionEnemy(Map, p, x_pos - 20, y_pos - 10, x_pos - 20, y_pos))
 		{
 			x_pos -= 10;
 			enemy.SetXPosition(x_pos);
@@ -220,7 +253,8 @@ void MoveEnemy(GameBoard& Map, Enemy& enemy, Player& p, int key)
 		}
 		break;
 	case 3:
-		if (Map.GetMap()[x_pos / 10 + 1][y_pos / 10] && Map.GetMap()[x_pos / 10 + 1][y_pos / 10 - 1])
+		if (Map.GetMap()[x_pos / 10 + 1][y_pos / 10] && Map.GetMap()[x_pos / 10 + 1][y_pos / 10 - 1]
+			&& CheckNextPositionEnemy(Map, p, x_pos + 10, y_pos - 10, x_pos + 10, y_pos))
 		{
 			x_pos += 10;
 			enemy.SetXPosition(x_pos);
@@ -247,7 +281,7 @@ void Magic(int x, int y, Player& player, GameBoard& Map)
 				player.SetAmmo(player.GetAmmo() + 1);
 				Map.SetMapElement(x / 10, y / 10, Place::SPACE);
 			}
-			else if (Map.GetMap()[x / 10][y / 10] == Place::SPACE && (0 < player.GetAmmo()))
+			else if (Map.GetMap()[x / 10][y / 10] == Place::SPACE && (0 < player.GetAmmo()) && Map.CheckNotEnemyPosition(x/10,y/10))
 			{
 				if (!((x_pos == x && y_pos == y) || (x_pos == x && y_pos - 10 == y) ||
 					(x_pos - 10 == x && y_pos - 10 == y) || (x_pos - 10 == x && y_pos == y)))
