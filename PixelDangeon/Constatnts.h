@@ -6,6 +6,8 @@
 #include <random>
 #include <math.h>
 #include <fstream>
+#include <sys/stat.h>
+#include <algorithm>
 #include "SFML/Graphics.hpp"
 
 using namespace std;
@@ -23,6 +25,7 @@ const sf::Color HiddenImproveBag = sf::Color::Color(199, 21, 133, 255);
 const sf::Color Portal = sf::Color::Color(0, 0, 128, 128);
 
 bool Eq(int x1, int y1, int x2, int y2);
+bool HaveFile(string path);
 
 enum Place
 {

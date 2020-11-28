@@ -91,6 +91,16 @@ public:
 		return background;
 	}
 
+	void SetXPortal(int x) 
+	{
+		this->x_portal = x;
+	}
+
+	void SetYPortal(int y)
+	{
+		this->y_portal = y;
+	}
+
 	int GetXPortal() const
 	{
 		return x_portal;
@@ -284,4 +294,5 @@ void MoveEnemy(GameBoard& Map, Enemy& enemy, Player& p, int key);
 int AI(const GameBoard& map, const Player& player, const Enemy& e);
 
 void Game(sf::RenderWindow& window, Player& p);
+void ContinueGame(sf::RenderWindow& window, Player& player);
 void Menu(sf::RenderWindow &window);
