@@ -3,8 +3,20 @@
 
 class Player: public Enemy
 {
+private:
+	int score = 0;
 public:
-	Player(int hp, int lim, int x_position, int y_position) : Enemy(hp, lim, x_position, y_position) {}
+	Player(int hp, int lim, int x_position, int y_position) : Enemy(hp, lim, x_position, y_position) { int score = 0; }
+
+	void SetScore(int sc)
+	{
+		this->score = sc;
+	}
+
+	int GetScore() const
+	{
+		return score;
+	}
 
 	void DrawBody(sf::RenderWindow& window) const
 	{
@@ -35,6 +47,11 @@ public:
 		text1.setFillColor(sf::Color::Red);
 		text1.setString(to_string(ammo) + " (max: " + to_string(limit_ammo) + ")");
 		text1.setPosition(window.getSize().y, 50);
+		window.draw(text1);
+
+		text1.setFillColor(sf::Color::Green);
+		text1.setString("Score: " + to_string(score));
+		text1.setPosition(window.getSize().y, 100);
 		window.draw(text1);
 	}
 };

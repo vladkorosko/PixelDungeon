@@ -5,6 +5,7 @@
 #include <time.h>
 #include <random>
 #include <math.h>
+#include <fstream>
 #include "SFML/Graphics.hpp"
 
 using namespace std;

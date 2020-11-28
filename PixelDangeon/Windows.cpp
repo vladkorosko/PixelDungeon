@@ -131,6 +131,11 @@ Player Generating(sf::RenderWindow& window, Player p = Player(100,20,30,30))
     }
 }
 
+void SaveGame(const GameBoard& map, const Player& p)
+{
+    
+}
+
 void Game(sf::RenderWindow& window, Player &player)
 {
     GameBoard Map(window.getSize().y/10, 10);
@@ -201,6 +206,12 @@ void Game(sf::RenderWindow& window, Player &player)
             }
         }
 
+        int sc = player.GetScore();
+        int numflour = sc / (2 * window.getSize().y);
+        int x = abs(player.GetXPosition() - (Map.GetXPortal() + 1) * 10);
+        int y = abs(player.GetYPosition() - (Map.GetYPortal() + 1) * 10);
+        player.SetScore(numflour * (2 * window.getSize().y) + (2 * window.getSize().y) - x - y);
+
         if (player.GetXPosition() / 10 == Map.GetXPortal() + 1 && player.GetYPosition() / 10 == Map.GetYPortal() + 1)
         {
             Generating(window, player);
@@ -213,7 +224,7 @@ void Game(sf::RenderWindow& window, Player &player)
         }
 
         window.clear();
-        Map.DrawVisionUpdated(window, player);
+        Map.DrawVisionUpdated(window,player);
         player.DrawBody(window);
         player.DrawCharacteristics(window);
 
