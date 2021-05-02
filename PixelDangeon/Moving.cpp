@@ -1,4 +1,4 @@
-#include "Gameboard.h"
+#include "Moving.h"
 
 void CheckCurrentPositionPlayer(GameBoard& Map, Player& player)
 {
@@ -161,11 +161,10 @@ bool CheckNextPositionEnemy(const GameBoard& Map, Player& p, int x1, int y1, int
 		Eq(x_pos, y_pos, x2, y2) || Eq(x_pos - 10, y_pos - 10, x2, y2) ||
 		Eq(x_pos - 10, y_pos, x2, y2) || Eq(x_pos, y_pos - 10, x2, y2))
 	{
-		p.SetHealth(p.GetHealth() - rand() % 10);
 		return false;
 	}
 
-	if (!Map.CheckNotEnemyPosition(x1, y1) || !Map.CheckNotEnemyPosition(x2, y2))
+	if (!Map.CheckNotEnemyPosition(x1 / 10, y1 / 10) || !Map.CheckNotEnemyPosition(x2 / 10, y2 / 10))
 	{
 		return false;
 	}

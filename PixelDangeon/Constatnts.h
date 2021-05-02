@@ -10,8 +10,6 @@
 #include <algorithm>
 #include "SFML/Graphics.hpp"
 
-using namespace std;
-
 const sf::Color HiddenWall = sf::Color::Color(47, 79, 79, 255);
 const sf::Color Free = sf::Color::Color(218, 165, 32, 255);
 const sf::Color Trap = sf::Color::Color(255, 69, 0, 255);
@@ -24,8 +22,8 @@ const sf::Color HiddenIncreaseHP = sf::Color::Color(30, 144, 255, 255);
 const sf::Color HiddenImproveBag = sf::Color::Color(199, 21, 133, 255);
 const sf::Color Portal = sf::Color::Color(0, 0, 128, 128);
 
-bool Eq(int x1, int y1, int x2, int y2);
-bool HaveFile(string path);
+
+bool HaveFile(std::string path);
 
 enum Place
 {

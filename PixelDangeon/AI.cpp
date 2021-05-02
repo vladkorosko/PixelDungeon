@@ -1,4 +1,4 @@
-#include "Gameboard.h"
+#include "AI.h"
 
 int AI(const GameBoard& map, const Player& player, const Enemy& e)
 {
