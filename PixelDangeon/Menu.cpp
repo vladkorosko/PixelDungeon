@@ -86,10 +86,10 @@ bool Exit()
 	return res;
 }
 
-Player Generating(sf::RenderWindow& window, Player p = Player(100,20,30,30))
+void Saving(sf::RenderWindow& window, bool* cont)
 {
     time_t start = clock();
-    while (window.isOpen())
+    while (window.isOpen() && *cont)
     {
         time_t finish = clock();
         sf::Event event;
@@ -103,12 +103,8 @@ Player Generating(sf::RenderWindow& window, Player p = Player(100,20,30,30))
                 }
         }
         time_t wt = finish - start;
-        if (wt >= 10000)
-        {
-            return p;
-        }
         window.clear();
-        std::string text = "Loading";
+        std::string text = "Saving";
         switch ((wt / 500) % 3)
         {
         case 0:
@@ -137,7 +133,7 @@ Player Generating(sf::RenderWindow& window, Player p = Player(100,20,30,30))
     }
 }
 
-void SaveGame(const GameBoard& map, const Player& p)
+void SaveGame(const GameBoard& map, const Player& p, bool* cont)
 {
     std::ofstream fout("Saved Game.txt");
     fout << p.GetHealth() << std::endl;
@@ -170,6 +166,7 @@ void SaveGame(const GameBoard& map, const Player& p)
         fout << map.GetEnemies()[i].GetXPosition() << std::endl;
         fout << map.GetEnemies()[i].GetYPosition() << std::endl;
     }
+    *cont = false;
 }
 
 void EndGame(sf::RenderWindow& window, int score)
@@ -425,58 +422,43 @@ void Game(sf::RenderWindow& window, Player& player, GameBoard& Map)
                 (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape))
                 if (Exit())
                 {
-                    SaveGame(Map, player);
+                    {
+                        bool* cont = new bool(true);
+                        std::thread out;
+                        std::thread save;
+                        save = std::thread(SaveGame, Map, player, cont);
+                        out = std::thread(Saving, std::ref(window), cont);
+
+                        out.join();
+                        save.join();
+                        delete cont;
+                    }
                     Menu(window);
                 }
             if (event.type == sf::Event::KeyPressed && (event.key.code == sf::Keyboard::Down || event.key.code == sf::Keyboard::S))
             {
                 MovePlayer(Map, player, 1);
-                for (size_t i = 0; i < Map.GetEnemies().size(); i++)
-                {
-                    Enemy new_e = Map.GetEnemies()[i];
-                    MoveEnemy(Map, new_e, player, AI(Map, player, new_e));
-                    Map.SetEnemyIndex(new_e, i);
-                }
+                MoveEnemiesParallel(Map, player);
             }
             if (event.type == sf::Event::KeyPressed && (event.key.code == sf::Keyboard::Up || event.key.code == sf::Keyboard::W))
             {
                 MovePlayer(Map, player, 0);
-                for (size_t i = 0; i < Map.GetEnemies().size(); i++)
-                {
-                    Enemy new_e = Map.GetEnemies()[i];
-                    MoveEnemy(Map, new_e, player, AI(Map, player, new_e));
-                    Map.SetEnemyIndex(new_e, i);
-                }
+                MoveEnemiesParallel(Map, player);
             }
             if (event.type == sf::Event::KeyPressed && (event.key.code == sf::Keyboard::Left || event.key.code == sf::Keyboard::A))
             {
                 MovePlayer(Map, player, 2);
-                for (size_t i = 0; i < Map.GetEnemies().size(); i++)
-                {
-                    Enemy new_e = Map.GetEnemies()[i];
-                    MoveEnemy(Map, new_e, player, AI(Map, player, new_e));
-                    Map.SetEnemyIndex(new_e, i);
-                }
+                MoveEnemiesParallel(Map, player);
             }
             if (event.type == sf::Event::KeyPressed && (event.key.code == sf::Keyboard::Right || event.key.code == sf::Keyboard::D))
             {
                 MovePlayer(Map, player, 3);
-                for (size_t i = 0; i < Map.GetEnemies().size(); i++)
-                {
-                    Enemy new_e = Map.GetEnemies()[i];
-                    MoveEnemy(Map, new_e, player, AI(Map, player, new_e));
-                    Map.SetEnemyIndex(new_e, i);
-                }
+                MoveEnemiesParallel(Map, player);
             }
             if (event.type == sf::Event::MouseButtonPressed && (event.mouseButton.button == sf::Mouse::Right))
             {
                 Magic(event.mouseButton.x, event.mouseButton.y, player, Map);
-                for (size_t i = 0; i < Map.GetEnemies().size(); i++)
-                {
-                    Enemy new_e = Map.GetEnemies()[i];
-                    MoveEnemy(Map, new_e, player, AI(Map, player, new_e));
-                    Map.SetEnemyIndex(new_e, i);
-                }
+                MoveEnemiesParallel(Map, player);
             }
         }
 
@@ -488,7 +470,6 @@ void Game(sf::RenderWindow& window, Player& player, GameBoard& Map)
 
         if (player.GetXPosition() / 10 == Map.GetXPortal() + 1 && player.GetYPosition() / 10 == Map.GetYPortal() + 1)
         {
-            Generating(window, player);
             NewGame(window, player);
         }
 
@@ -562,11 +543,9 @@ void Menu(sf::RenderWindow& window)
                 switch (position)
                 {
                 case 1:
-                    p = Generating(window);
                     NewGame(window, p);
                     break;
                 case 2:
-                    p = Generating(window);
                     ContinueGame(window, p);
                     break;
                 case 3:

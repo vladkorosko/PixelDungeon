@@ -124,7 +124,7 @@ void GameBoard::Draw(sf::RenderWindow& window) const
 		{
 			sf::RectangleShape body;
 			body.setSize(sf::Vector2f(10, 10));
-			body.setPosition(i * 10, j * 10);
+			body.setPosition(static_cast<float>(i * 10), static_cast<float>(j * 10));
 			switch (map[i][j])
 			{
 			case 0:
@@ -167,7 +167,7 @@ void GameBoard::DrawVisionUpdated(sf::RenderWindow& window, Player& p)
 				int y_pos = j + y_p / 10;
 				if (x_pos >= 0 && y_pos >= 0 && x_pos < static_cast<int>(map.size()) && y_pos < static_cast<int>(map.size()))
 				{
-					body.setPosition(x_pos * 10, y_pos * 10);
+					body.setPosition(static_cast<float>(x_pos * 10), static_cast<float>(y_pos * 10));
 					switch (map[x_pos][y_pos])
 					{
 					case 0:
@@ -201,22 +201,22 @@ void GameBoard::DrawVisionUpdated(sf::RenderWindow& window, Player& p)
 		i.DrawBody(window);
 		if (abs(x_p - x_e - 5) + abs(y_p - y_e - 5) > 55)
 		{
-			body.setPosition(x_e, y_e);
+			body.setPosition(static_cast<float>(x_e), static_cast<float>(y_e));
 			window.draw(body);
 		}
 		if (abs(x_p - x_e + 5) + abs(y_p - y_e - 5) > 55)
 		{
-			body.setPosition(x_e - 10, y_e);
+			body.setPosition(static_cast<float>(x_e - 10), static_cast<float>(y_e));
 			window.draw(body);
 		}
 		if (abs(x_p - x_e - 5) + abs(y_p - y_e + 5) > 55)
 		{
-			body.setPosition(x_e, y_e - 10);
+			body.setPosition(static_cast<float>(x_e), static_cast<float>(y_e - 10));
 			window.draw(body);
 		}
 		if (abs(x_p - x_e + 5) + abs(y_p - y_e + 5) > 55)
 		{
-			body.setPosition(x_e - 10, y_e - 10);
+			body.setPosition(static_cast<float>(x_e - 10), static_cast<float>(y_e - 10));
 			window.draw(body);
 		}
 	}
