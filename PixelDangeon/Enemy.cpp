@@ -23,7 +23,10 @@ int Enemy::GetHealth() const
 
 void Enemy::SetAmmo(const int& ammo)
 {
-	this->ammo = ammo;
+	if(ammo>limit_ammo)
+		this->ammo = limit_ammo;
+	else
+		this->ammo = ammo;
 }
 
 int Enemy::GetAmmo() const
@@ -34,6 +37,8 @@ int Enemy::GetAmmo() const
 void Enemy::SetLimitAmmo(const int& limit_ammo)
 {
 	this->limit_ammo = limit_ammo;
+	if (limit_ammo < ammo)
+		this->ammo = limit_ammo;
 }
 
 int Enemy::GetLimitAmmo() const
@@ -86,4 +91,185 @@ void Enemy::DrawCharacteristics(sf::RenderWindow& window) const
 	text1.setString(std::to_string(health));
 	text1.setPosition(window.getSize().y, 25);
 	window.draw(text1);
+}
+
+TEST_CASE("testing enemy constructor with getters")
+{
+	{	
+		int hp = 100, lim_ammo = 10, ammo = lim_ammo / 2, x_pos = 110, y_pos = 120;
+		Enemy e(hp, lim_ammo, x_pos, y_pos);
+		CHECK(hp == e.GetHealth());
+		CHECK(lim_ammo == e.GetLimitAmmo());
+		CHECK(ammo == e.GetAmmo());
+		CHECK(x_pos == e.GetXPosition());
+		CHECK(y_pos == e.GetYPosition());
+	}
+
+	{
+		int hp = 10, lim_ammo = 5, ammo = lim_ammo / 2, x_pos = 55, y_pos = 60;
+		Enemy e(hp, lim_ammo, x_pos, y_pos);
+		CHECK(hp == e.GetHealth());
+		CHECK(lim_ammo == e.GetLimitAmmo());
+		CHECK(ammo == e.GetAmmo());
+		CHECK(x_pos == e.GetXPosition());
+		CHECK(y_pos == e.GetYPosition());
+	}
+}
+
+TEST_CASE("testing operator=")
+{
+	{
+		int hp = 100, lim_ammo = 10, ammo = lim_ammo / 2, x_pos = 110, y_pos = 120;
+		Enemy e1(hp, lim_ammo, x_pos, y_pos);
+		Enemy e_copy = e1;
+		CHECK(hp == e_copy.GetHealth());
+		CHECK(lim_ammo == e_copy.GetLimitAmmo());
+		CHECK(ammo == e_copy.GetAmmo());
+		CHECK(x_pos == e_copy.GetXPosition());
+		CHECK(y_pos == e_copy.GetYPosition());
+	}
+
+	{
+		int hp = 10, lim_ammo = 5, ammo = lim_ammo / 2, x_pos = 55, y_pos = 60;
+		Enemy e1(hp, lim_ammo, x_pos, y_pos);
+		Enemy e_copy = e1;
+		CHECK(hp == e_copy.GetHealth());
+		CHECK(lim_ammo == e_copy.GetLimitAmmo());
+		CHECK(ammo == e_copy.GetAmmo());
+		CHECK(x_pos == e_copy.GetXPosition());
+		CHECK(y_pos == e_copy.GetYPosition());
+	}
+}
+
+TEST_CASE("testing setters")
+{
+	{	
+		int hp = 100, lim_ammo = 10, ammo = lim_ammo / 2, x_pos = 110, y_pos = 120;
+		Enemy e(hp, lim_ammo, x_pos, y_pos);
+		int new_hp = 50;
+		e.SetHealth(new_hp);
+		CHECK(new_hp == e.GetHealth());
+		CHECK(lim_ammo == e.GetLimitAmmo());
+		CHECK(ammo == e.GetAmmo());
+		CHECK(x_pos == e.GetXPosition());
+		CHECK(y_pos == e.GetYPosition());
+	}
+	{
+		int hp = 100, lim_ammo = 10, ammo = lim_ammo / 2, x_pos = 110, y_pos = 120;
+		Enemy e(hp, lim_ammo, x_pos, y_pos);
+		int new_hp = 200;
+		e.SetHealth(new_hp);
+		CHECK(new_hp == e.GetHealth());
+		CHECK(lim_ammo == e.GetLimitAmmo());
+		CHECK(ammo == e.GetAmmo());
+		CHECK(x_pos == e.GetXPosition());
+		CHECK(y_pos == e.GetYPosition());
+	}
+
+	{
+		int hp = 100, lim_ammo = 10, ammo = lim_ammo / 2, x_pos = 110, y_pos = 120;
+		Enemy e(hp, lim_ammo, x_pos, y_pos);
+		int new_ammo = 200;
+		e.SetAmmo(new_ammo);
+		CHECK(hp == e.GetHealth());
+		CHECK(lim_ammo == e.GetLimitAmmo());
+		if (new_ammo > lim_ammo)
+			CHECK(lim_ammo == e.GetAmmo());
+		else
+			CHECK(new_ammo == e.GetAmmo());
+		CHECK(x_pos == e.GetXPosition());
+		CHECK(y_pos == e.GetYPosition());
+	}
+
+	{
+		int hp = 100, lim_ammo = 10, ammo = lim_ammo / 2, x_pos = 110, y_pos = 120;
+		Enemy e(hp, lim_ammo, x_pos, y_pos);
+		int new_ammo = 2;
+		e.SetAmmo(new_ammo);
+		CHECK(hp == e.GetHealth());
+		CHECK(lim_ammo == e.GetLimitAmmo());
+		if (new_ammo > lim_ammo)
+			CHECK(lim_ammo == e.GetAmmo());
+		else
+			CHECK(new_ammo == e.GetAmmo());
+		CHECK(x_pos == e.GetXPosition());
+		CHECK(y_pos == e.GetYPosition());
+	}
+
+	{
+		int hp = 100, lim_ammo = 10, ammo = lim_ammo / 2, x_pos = 110, y_pos = 120;
+		Enemy e(hp, lim_ammo, x_pos, y_pos);
+		int new_limit = 200;
+		e.SetLimitAmmo(new_limit);
+		CHECK(hp == e.GetHealth());
+		CHECK(new_limit == e.GetLimitAmmo());
+		if (ammo > new_limit)
+			CHECK(new_limit == e.GetAmmo());
+		else
+			CHECK(ammo == e.GetAmmo());
+		CHECK(x_pos == e.GetXPosition());
+		CHECK(y_pos == e.GetYPosition());
+	}
+
+	{
+		int hp = 100, lim_ammo = 10, ammo = lim_ammo / 2, x_pos = 110, y_pos = 120;
+		Enemy e(hp, lim_ammo, x_pos, y_pos);
+		int new_limit = 2;
+		e.SetLimitAmmo(new_limit);
+		CHECK(hp == e.GetHealth());
+		CHECK(new_limit == e.GetLimitAmmo());
+		if (ammo > new_limit)
+			CHECK(new_limit == e.GetAmmo());
+		else
+			CHECK(ammo == e.GetAmmo());
+		CHECK(x_pos == e.GetXPosition());
+		CHECK(y_pos == e.GetYPosition());
+	}
+
+	{
+		int hp = 100, lim_ammo = 10, ammo = lim_ammo / 2, x_pos = 110, y_pos = 120;
+		Enemy e(hp, lim_ammo, x_pos, y_pos);
+		int new_x = 50;
+		e.SetXPosition(new_x);
+		CHECK(hp == e.GetHealth());
+		CHECK(lim_ammo == e.GetLimitAmmo());
+		CHECK(ammo == e.GetAmmo());
+		CHECK(new_x == e.GetXPosition());
+		CHECK(y_pos == e.GetYPosition());
+	}
+	{
+		int hp = 100, lim_ammo = 10, ammo = lim_ammo / 2, x_pos = 110, y_pos = 120;
+		Enemy e(hp, lim_ammo, x_pos, y_pos);
+		int new_x = 170;
+		e.SetXPosition(new_x);
+		CHECK(hp == e.GetHealth());
+		CHECK(lim_ammo == e.GetLimitAmmo());
+		CHECK(ammo == e.GetAmmo());
+		CHECK(new_x == e.GetXPosition());
+		CHECK(y_pos == e.GetYPosition());
+	}
+
+	{
+		int hp = 100, lim_ammo = 10, ammo = lim_ammo / 2, x_pos = 110, y_pos = 120;
+		Enemy e(hp, lim_ammo, x_pos, y_pos);
+		int new_y = 50;
+		e.SetYPosition(new_y);
+		CHECK(hp == e.GetHealth());
+		CHECK(lim_ammo == e.GetLimitAmmo());
+		CHECK(ammo == e.GetAmmo());
+		CHECK(x_pos == e.GetXPosition());
+		CHECK(new_y == e.GetYPosition());
+	}
+
+	{
+		int hp = 100, lim_ammo = 10, ammo = lim_ammo / 2, x_pos = 110, y_pos = 120;
+		Enemy e(hp, lim_ammo, x_pos, y_pos);
+		int new_y = 150;
+		e.SetYPosition(new_y);
+		CHECK(hp == e.GetHealth());
+		CHECK(lim_ammo == e.GetLimitAmmo());
+		CHECK(ammo == e.GetAmmo());
+		CHECK(x_pos == e.GetXPosition());
+		CHECK(new_y == e.GetYPosition());
+	}
 }

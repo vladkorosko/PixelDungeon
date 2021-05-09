@@ -1,0 +1,27 @@
+var searchData=
+[
+  ['setammo_70',['SetAmmo',['../class_enemy.html#a468b60ffc07a702d3ebfe4076426c44b',1,'Enemy']]],
+  ['setbackgroundelement_71',['SetBackGroundElement',['../class_game_board.html#a54302e59b8f1443a0775434bd3409ab4',1,'GameBoard']]],
+  ['setenemyindex_72',['SetEnemyIndex',['../class_game_board.html#ae94aba27aeca4800145fd59769cad62d',1,'GameBoard']]],
+  ['sethealth_73',['SetHealth',['../class_enemy.html#a62f1d515856b700bc90243d5c2883997',1,'Enemy']]],
+  ['setlimitammo_74',['SetLimitAmmo',['../class_enemy.html#a1e0fc47921f7d658643e394a2613d893',1,'Enemy']]],
+  ['setmapelement_75',['SetMapElement',['../class_game_board.html#a4d88d0a5f2e43245efd1a9ddb542c198',1,'GameBoard']]],
+  ['setscore_76',['SetScore',['../class_player.html#a6ad458c76aeb19ba63a30352985c59ee',1,'Player']]],
+  ['setxportal_77',['SetXPortal',['../class_game_board.html#a026f321bb26583a71005a0edd4ed2da1',1,'GameBoard']]],
+  ['setxposition_78',['SetXPosition',['../class_enemy.html#a7283501a83da41e910f932b7a11a9cdc',1,'Enemy']]],
+  ['setyportal_79',['SetYPortal',['../class_game_board.html#a0ac2f7703b06fb60e4cb57209c2d8f7e',1,'GameBoard']]],
+  ['setyposition_80',['SetYPosition',['../class_enemy.html#ad01a0557dcfb80840b34ad05c42c1e59',1,'Enemy']]],
+  ['string_81',['String',['../classdoctest_1_1_string.html',1,'doctest']]],
+  ['stringmaker_82',['StringMaker',['../structdoctest_1_1_string_maker.html',1,'doctest']]],
+  ['stringmaker_3c_20r_20c_3a_3a_2a_20_3e_83',['StringMaker&lt; R C::* &gt;',['../structdoctest_1_1_string_maker_3_01_r_01_c_1_1_5_01_4.html',1,'doctest']]],
+  ['stringmaker_3c_20t_20_2a_20_3e_84',['StringMaker&lt; T * &gt;',['../structdoctest_1_1_string_maker_3_01_t_01_5_01_4.html',1,'doctest']]],
+  ['stringmakerbase_85',['StringMakerBase',['../structdoctest_1_1detail_1_1_string_maker_base.html',1,'doctest::detail']]],
+  ['stringmakerbase_3c_20detail_3a_3ahas_5finsertion_5foperator_3c_20t_20_3e_3a_3avalue_20_3e_86',['StringMakerBase&lt; detail::has_insertion_operator&lt; T &gt;::value &gt;',['../structdoctest_1_1detail_1_1_string_maker_base.html',1,'doctest::detail']]],
+  ['stringmakerbase_3c_20true_20_3e_87',['StringMakerBase&lt; true &gt;',['../structdoctest_1_1detail_1_1_string_maker_base_3_01true_01_4.html',1,'doctest::detail']]],
+  ['stringstream_88',['StringStream',['../structdoctest_1_1detail_1_1_string_stream.html',1,'doctest::detail']]],
+  ['stringstreambase_89',['StringStreamBase',['../structdoctest_1_1detail_1_1_string_stream_base.html',1,'doctest::detail']]],
+  ['stringstreambase_3c_20has_5finsertion_5foperator_3c_20t_20_3e_3a_3avalue_20_3e_90',['StringStreamBase&lt; has_insertion_operator&lt; T &gt;::value &gt;',['../structdoctest_1_1detail_1_1_string_stream_base.html',1,'doctest::detail']]],
+  ['stringstreambase_3c_20true_20_3e_91',['StringStreamBase&lt; true &gt;',['../structdoctest_1_1detail_1_1_string_stream_base_3_01true_01_4.html',1,'doctest::detail']]],
+  ['subcase_92',['Subcase',['../structdoctest_1_1detail_1_1_subcase.html',1,'doctest::detail']]],
+  ['subcasesignature_93',['SubcaseSignature',['../structdoctest_1_1_subcase_signature.html',1,'doctest']]]
+];

@@ -1,0 +1,123 @@
+\hypertarget{class_player}{}\doxysection{Player Class Reference}
+\label{class_player}\index{Player@{Player}}
+
+
+Class \mbox{\hyperlink{class_player}{Player}} for description model of player for the game.  
+
+
+
+
+{\ttfamily \#include $<$Player.\+h$>$}
+
+
+
+Inherits \mbox{\hyperlink{class_enemy}{Enemy}}.
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_player_afc0f2a0b749885e498ecfe9c18b9e0dd}{Player}} (int hp, int lim, int x\+\_\+position, int y\+\_\+position)
+\begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_player_a6ad458c76aeb19ba63a30352985c59ee}{Set\+Score}} (int sc)
+\begin{DoxyCompactList}\small\item\em Setting score. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_player_a777fb06bddf27e2810053843cb0cc6f9}{Get\+Score}} () const
+\begin{DoxyCompactList}\small\item\em Getting score. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_player_ad1a3e4eae97f2bcc244935f5caa70f70}{Draw\+Body}} (sf\+::\+Render\+Window \&window) const
+\begin{DoxyCompactList}\small\item\em Show player on map. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_player_a5ccc6206c675d030f908eb0ce25ddb36}{Draw\+Characteristics}} (sf\+::\+Render\+Window \&window) const
+\begin{DoxyCompactList}\small\item\em Show players characteristics on your screen. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Detailed Description}
+Class \mbox{\hyperlink{class_player}{Player}} for description model of player for the game. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_player_afc0f2a0b749885e498ecfe9c18b9e0dd}\label{class_player_afc0f2a0b749885e498ecfe9c18b9e0dd}} 
+\index{Player@{Player}!Player@{Player}}
+\index{Player@{Player}!Player@{Player}}
+\doxysubsubsection{\texorpdfstring{Player()}{Player()}}
+{\footnotesize\ttfamily Player\+::\+Player (\begin{DoxyParamCaption}\item[{int}]{hp,  }\item[{int}]{lim,  }\item[{int}]{x\+\_\+position,  }\item[{int}]{y\+\_\+position }\end{DoxyParamCaption})}
+
+
+
+Constructor. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em int} & hp -\/ number of health points \\
+\hline
+{\em int} & lim -\/ max number of blocks that you can put into yours player bag \\
+\hline
+{\em int} & x\+\_\+position -\/ x coordinate on map \\
+\hline
+{\em int} & y\+\_\+position -\/ y coordinate on map \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_player_ad1a3e4eae97f2bcc244935f5caa70f70}\label{class_player_ad1a3e4eae97f2bcc244935f5caa70f70}} 
+\index{Player@{Player}!DrawBody@{DrawBody}}
+\index{DrawBody@{DrawBody}!Player@{Player}}
+\doxysubsubsection{\texorpdfstring{DrawBody()}{DrawBody()}}
+{\footnotesize\ttfamily void Player\+::\+Draw\+Body (\begin{DoxyParamCaption}\item[{sf\+::\+Render\+Window \&}]{window }\end{DoxyParamCaption}) const}
+
+
+
+Show player on map. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ out}}  & {\em sf\+::\+Render\+Window\&} & window -\/ the window of game \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_player_a5ccc6206c675d030f908eb0ce25ddb36}\label{class_player_a5ccc6206c675d030f908eb0ce25ddb36}} 
+\index{Player@{Player}!DrawCharacteristics@{DrawCharacteristics}}
+\index{DrawCharacteristics@{DrawCharacteristics}!Player@{Player}}
+\doxysubsubsection{\texorpdfstring{DrawCharacteristics()}{DrawCharacteristics()}}
+{\footnotesize\ttfamily void Player\+::\+Draw\+Characteristics (\begin{DoxyParamCaption}\item[{sf\+::\+Render\+Window \&}]{window }\end{DoxyParamCaption}) const}
+
+
+
+Show players characteristics on your screen. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ out}}  & {\em sf\+::\+Render\+Window\&} & window -\/ the window of game \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_player_a777fb06bddf27e2810053843cb0cc6f9}\label{class_player_a777fb06bddf27e2810053843cb0cc6f9}} 
+\index{Player@{Player}!GetScore@{GetScore}}
+\index{GetScore@{GetScore}!Player@{Player}}
+\doxysubsubsection{\texorpdfstring{GetScore()}{GetScore()}}
+{\footnotesize\ttfamily int Player\+::\+Get\+Score (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Getting score. 
+
+\begin{DoxyReturn}{Returns}
+the score of player 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_player_a6ad458c76aeb19ba63a30352985c59ee}\label{class_player_a6ad458c76aeb19ba63a30352985c59ee}} 
+\index{Player@{Player}!SetScore@{SetScore}}
+\index{SetScore@{SetScore}!Player@{Player}}
+\doxysubsubsection{\texorpdfstring{SetScore()}{SetScore()}}
+{\footnotesize\ttfamily void Player\+::\+Set\+Score (\begin{DoxyParamCaption}\item[{int}]{sc }\end{DoxyParamCaption})}
+
+
+
+Setting score. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em int} & sc -\/ number of points you get on game(score) \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{_player_8h}{Player.\+h}}\item 
+Player.\+cpp\end{DoxyCompactItemize}

@@ -1,6 +1,5 @@
 #include "AI.h"
 
-
 int AI(const GameBoard& map, const Player& player, const Enemy& e)
 {
 	int x = player.GetXPosition() - e.GetXPosition() - 5;

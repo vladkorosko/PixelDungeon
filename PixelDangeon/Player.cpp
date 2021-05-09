@@ -48,3 +48,57 @@ void Player::DrawCharacteristics(sf::RenderWindow& window) const
 	text1.setPosition(window.getSize().y, 100);
 	window.draw(text1);
 }
+
+TEST_CASE("testing player constructor with getters")
+{
+	{
+		int hp = 100, lim_ammo = 10, ammo = lim_ammo / 2, x_pos = 110, y_pos = 120, score = 0;
+		Player p(hp, lim_ammo, x_pos, y_pos);
+		CHECK(hp == p.GetHealth());
+		CHECK(lim_ammo == p.GetLimitAmmo());
+		CHECK(ammo == p.GetAmmo());
+		CHECK(x_pos == p.GetXPosition());
+		CHECK(y_pos == p.GetYPosition());
+		CHECK(score == p.GetScore());
+	}
+
+	{
+		int hp = 10, lim_ammo = 5, ammo = lim_ammo / 2, x_pos = 55, y_pos = 60, score = 0;
+		Player p(hp, lim_ammo, x_pos, y_pos);
+		CHECK(hp == p.GetHealth());
+		CHECK(lim_ammo == p.GetLimitAmmo());
+		CHECK(ammo == p.GetAmmo());
+		CHECK(x_pos == p.GetXPosition());
+		CHECK(y_pos == p.GetYPosition());
+		CHECK(score == p.GetScore());
+	}
+}
+
+TEST_CASE("testing SetScore")
+{
+	{
+		int hp = 100, lim_ammo = 10, ammo = lim_ammo / 2, x_pos = 110, y_pos = 120;
+		Player p(hp, lim_ammo, x_pos, y_pos);
+		int new_score = 1000;
+		p.SetScore(new_score);
+		CHECK(hp == p.GetHealth());
+		CHECK(lim_ammo == p.GetLimitAmmo());
+		CHECK(ammo == p.GetAmmo());
+		CHECK(x_pos == p.GetXPosition());
+		CHECK(y_pos == p.GetYPosition());
+		CHECK(new_score == p.GetScore());
+	}
+
+	{
+		int hp = 100, lim_ammo = 10, ammo = lim_ammo / 2, x_pos = 110, y_pos = 120;
+		Player p(hp, lim_ammo, x_pos, y_pos);
+		int new_score = 2000;
+		p.SetScore(new_score);
+		CHECK(hp == p.GetHealth());
+		CHECK(lim_ammo == p.GetLimitAmmo());
+		CHECK(ammo == p.GetAmmo());
+		CHECK(x_pos == p.GetXPosition());
+		CHECK(y_pos == p.GetYPosition());
+		CHECK(new_score == p.GetScore());
+	}
+}

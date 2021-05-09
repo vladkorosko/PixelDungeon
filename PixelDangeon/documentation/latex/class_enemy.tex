@@ -1,0 +1,285 @@
+\hypertarget{class_enemy}{}\doxysection{Enemy Class Reference}
+\label{class_enemy}\index{Enemy@{Enemy}}
+
+
+Class \mbox{\hyperlink{class_enemy}{Enemy}} for description model of enemies for the game.  
+
+
+
+
+{\ttfamily \#include $<$Enemy.\+h$>$}
+
+
+
+Inherited by \mbox{\hyperlink{class_player}{Player}}.
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_enemy_a9ac7a116c37f96a50d6ce20eba61a8c3}{Enemy}} (int hp, int lim, int x\+\_\+position, int y\+\_\+position)
+\begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_enemy_ad8369ea083838dfd752575fd05d538b2}{operator=}} (const \mbox{\hyperlink{class_enemy}{Enemy}} \&e)
+\begin{DoxyCompactList}\small\item\em Copy constructor. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_enemy_a62f1d515856b700bc90243d5c2883997}{Set\+Health}} (const int \&hp)
+\begin{DoxyCompactList}\small\item\em Setting health. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_enemy_a7e767a60a18a95ae4b249fea94ac7100}{Get\+Health}} () const
+\begin{DoxyCompactList}\small\item\em Getting number of health points. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_enemy_a468b60ffc07a702d3ebfe4076426c44b}{Set\+Ammo}} (const int \&ammo)
+\begin{DoxyCompactList}\small\item\em Setting health. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_enemy_a895edaecddede6daaf41e65aac6f5272}{Get\+Ammo}} () const
+\begin{DoxyCompactList}\small\item\em Getting number of blocks in bag. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_enemy_a1e0fc47921f7d658643e394a2613d893}{Set\+Limit\+Ammo}} (const int \&limit\+\_\+ammo)
+\begin{DoxyCompactList}\small\item\em Setting limit of blocks. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_enemy_a08de51ccd45b5f966cc5de33d5b6384c}{Get\+Limit\+Ammo}} () const
+\begin{DoxyCompactList}\small\item\em Getting limit of blocks. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_enemy_a7283501a83da41e910f932b7a11a9cdc}{Set\+XPosition}} (const int \&x)
+\begin{DoxyCompactList}\small\item\em Setting x coordinate. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_enemy_ace74e4f5c9449607d977525fbcb8d776}{Get\+XPosition}} () const
+\begin{DoxyCompactList}\small\item\em Getting x coordinate. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_enemy_ad01a0557dcfb80840b34ad05c42c1e59}{Set\+YPosition}} (const int \&y)
+\begin{DoxyCompactList}\small\item\em Setting y coordinate. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_enemy_a1cc4bee241eeb0aa0fbf24824caea4d6}{Get\+YPosition}} () const
+\begin{DoxyCompactList}\small\item\em Getting y coordinate. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_enemy_aa06b898649b56c0b8db05f39259e076e}{Draw\+Body}} (sf\+::\+Render\+Window \&window) const
+\begin{DoxyCompactList}\small\item\em Show enemy on map. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_enemy_ace509ac951e36c9649454d6f40afdc9a}{Draw\+Characteristics}} (sf\+::\+Render\+Window \&window) const
+\begin{DoxyCompactList}\small\item\em Show enemies characteristics on your screen. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_enemy_aedd5e7bf8ef07ee97be433c853a10d8d}\label{class_enemy_aedd5e7bf8ef07ee97be433c853a10d8d}} 
+int {\bfseries health}
+\item 
+\mbox{\Hypertarget{class_enemy_aa177bcd158893703ddf0b1d9a2f02093}\label{class_enemy_aa177bcd158893703ddf0b1d9a2f02093}} 
+int {\bfseries ammo}
+\item 
+\mbox{\Hypertarget{class_enemy_a50c7699f099af882c926fa64b0779d8f}\label{class_enemy_a50c7699f099af882c926fa64b0779d8f}} 
+int {\bfseries limit\+\_\+ammo}
+\item 
+\mbox{\Hypertarget{class_enemy_a87d69f09d19ffbcd03dc43f74d7f40fe}\label{class_enemy_a87d69f09d19ffbcd03dc43f74d7f40fe}} 
+int {\bfseries x\+\_\+pos}
+\item 
+\mbox{\Hypertarget{class_enemy_a4c43e9a9a5e2d5befeeb7f1892e5c614}\label{class_enemy_a4c43e9a9a5e2d5befeeb7f1892e5c614}} 
+int {\bfseries y\+\_\+pos}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Class \mbox{\hyperlink{class_enemy}{Enemy}} for description model of enemies for the game. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_enemy_a9ac7a116c37f96a50d6ce20eba61a8c3}\label{class_enemy_a9ac7a116c37f96a50d6ce20eba61a8c3}} 
+\index{Enemy@{Enemy}!Enemy@{Enemy}}
+\index{Enemy@{Enemy}!Enemy@{Enemy}}
+\doxysubsubsection{\texorpdfstring{Enemy()}{Enemy()}}
+{\footnotesize\ttfamily Enemy\+::\+Enemy (\begin{DoxyParamCaption}\item[{int}]{hp,  }\item[{int}]{lim,  }\item[{int}]{x\+\_\+position,  }\item[{int}]{y\+\_\+position }\end{DoxyParamCaption})}
+
+
+
+Constructor. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em int} & hp -\/ number of health points \\
+\hline
+{\em int} & lim -\/ max number of blocks that can take enemy \\
+\hline
+{\em int} & x\+\_\+position -\/ x coordinate on map \\
+\hline
+{\em int} & y\+\_\+position -\/ y coordinate on map \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_enemy_aa06b898649b56c0b8db05f39259e076e}\label{class_enemy_aa06b898649b56c0b8db05f39259e076e}} 
+\index{Enemy@{Enemy}!DrawBody@{DrawBody}}
+\index{DrawBody@{DrawBody}!Enemy@{Enemy}}
+\doxysubsubsection{\texorpdfstring{DrawBody()}{DrawBody()}}
+{\footnotesize\ttfamily void Enemy\+::\+Draw\+Body (\begin{DoxyParamCaption}\item[{sf\+::\+Render\+Window \&}]{window }\end{DoxyParamCaption}) const}
+
+
+
+Show enemy on map. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ out}}  & {\em sf\+::\+Render\+Window\&} & window -\/ the window of game \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_enemy_ace509ac951e36c9649454d6f40afdc9a}\label{class_enemy_ace509ac951e36c9649454d6f40afdc9a}} 
+\index{Enemy@{Enemy}!DrawCharacteristics@{DrawCharacteristics}}
+\index{DrawCharacteristics@{DrawCharacteristics}!Enemy@{Enemy}}
+\doxysubsubsection{\texorpdfstring{DrawCharacteristics()}{DrawCharacteristics()}}
+{\footnotesize\ttfamily void Enemy\+::\+Draw\+Characteristics (\begin{DoxyParamCaption}\item[{sf\+::\+Render\+Window \&}]{window }\end{DoxyParamCaption}) const}
+
+
+
+Show enemies characteristics on your screen. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ out}}  & {\em sf\+::\+Render\+Window\&} & window -\/ the window of game \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_enemy_a895edaecddede6daaf41e65aac6f5272}\label{class_enemy_a895edaecddede6daaf41e65aac6f5272}} 
+\index{Enemy@{Enemy}!GetAmmo@{GetAmmo}}
+\index{GetAmmo@{GetAmmo}!Enemy@{Enemy}}
+\doxysubsubsection{\texorpdfstring{GetAmmo()}{GetAmmo()}}
+{\footnotesize\ttfamily int Enemy\+::\+Get\+Ammo (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Getting number of blocks in bag. 
+
+\begin{DoxyReturn}{Returns}
+number of blocks 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_enemy_a7e767a60a18a95ae4b249fea94ac7100}\label{class_enemy_a7e767a60a18a95ae4b249fea94ac7100}} 
+\index{Enemy@{Enemy}!GetHealth@{GetHealth}}
+\index{GetHealth@{GetHealth}!Enemy@{Enemy}}
+\doxysubsubsection{\texorpdfstring{GetHealth()}{GetHealth()}}
+{\footnotesize\ttfamily int Enemy\+::\+Get\+Health (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Getting number of health points. 
+
+\begin{DoxyReturn}{Returns}
+number of health points 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_enemy_a08de51ccd45b5f966cc5de33d5b6384c}\label{class_enemy_a08de51ccd45b5f966cc5de33d5b6384c}} 
+\index{Enemy@{Enemy}!GetLimitAmmo@{GetLimitAmmo}}
+\index{GetLimitAmmo@{GetLimitAmmo}!Enemy@{Enemy}}
+\doxysubsubsection{\texorpdfstring{GetLimitAmmo()}{GetLimitAmmo()}}
+{\footnotesize\ttfamily int Enemy\+::\+Get\+Limit\+Ammo (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Getting limit of blocks. 
+
+\begin{DoxyReturn}{Returns}
+limit of blocks 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_enemy_ace74e4f5c9449607d977525fbcb8d776}\label{class_enemy_ace74e4f5c9449607d977525fbcb8d776}} 
+\index{Enemy@{Enemy}!GetXPosition@{GetXPosition}}
+\index{GetXPosition@{GetXPosition}!Enemy@{Enemy}}
+\doxysubsubsection{\texorpdfstring{GetXPosition()}{GetXPosition()}}
+{\footnotesize\ttfamily int Enemy\+::\+Get\+XPosition (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Getting x coordinate. 
+
+\begin{DoxyReturn}{Returns}
+x coordinate of enemy 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_enemy_a1cc4bee241eeb0aa0fbf24824caea4d6}\label{class_enemy_a1cc4bee241eeb0aa0fbf24824caea4d6}} 
+\index{Enemy@{Enemy}!GetYPosition@{GetYPosition}}
+\index{GetYPosition@{GetYPosition}!Enemy@{Enemy}}
+\doxysubsubsection{\texorpdfstring{GetYPosition()}{GetYPosition()}}
+{\footnotesize\ttfamily int Enemy\+::\+Get\+YPosition (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Getting y coordinate. 
+
+\begin{DoxyReturn}{Returns}
+y coordinate of enemy 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_enemy_ad8369ea083838dfd752575fd05d538b2}\label{class_enemy_ad8369ea083838dfd752575fd05d538b2}} 
+\index{Enemy@{Enemy}!operator=@{operator=}}
+\index{operator=@{operator=}!Enemy@{Enemy}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}}
+{\footnotesize\ttfamily void Enemy\+::operator= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_enemy}{Enemy}} \&}]{e }\end{DoxyParamCaption})}
+
+
+
+Copy constructor. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em const} & \mbox{\hyperlink{class_enemy}{Enemy}}\& e -\/ an enemy to copy \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_enemy_a468b60ffc07a702d3ebfe4076426c44b}\label{class_enemy_a468b60ffc07a702d3ebfe4076426c44b}} 
+\index{Enemy@{Enemy}!SetAmmo@{SetAmmo}}
+\index{SetAmmo@{SetAmmo}!Enemy@{Enemy}}
+\doxysubsubsection{\texorpdfstring{SetAmmo()}{SetAmmo()}}
+{\footnotesize\ttfamily void Enemy\+::\+Set\+Ammo (\begin{DoxyParamCaption}\item[{const int \&}]{ammo }\end{DoxyParamCaption})}
+
+
+
+Setting health. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em const} & int\& hp -\/ new number of health points \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_enemy_a62f1d515856b700bc90243d5c2883997}\label{class_enemy_a62f1d515856b700bc90243d5c2883997}} 
+\index{Enemy@{Enemy}!SetHealth@{SetHealth}}
+\index{SetHealth@{SetHealth}!Enemy@{Enemy}}
+\doxysubsubsection{\texorpdfstring{SetHealth()}{SetHealth()}}
+{\footnotesize\ttfamily void Enemy\+::\+Set\+Health (\begin{DoxyParamCaption}\item[{const int \&}]{hp }\end{DoxyParamCaption})}
+
+
+
+Setting health. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em const} & int\& hp -\/ new number of health points \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_enemy_a1e0fc47921f7d658643e394a2613d893}\label{class_enemy_a1e0fc47921f7d658643e394a2613d893}} 
+\index{Enemy@{Enemy}!SetLimitAmmo@{SetLimitAmmo}}
+\index{SetLimitAmmo@{SetLimitAmmo}!Enemy@{Enemy}}
+\doxysubsubsection{\texorpdfstring{SetLimitAmmo()}{SetLimitAmmo()}}
+{\footnotesize\ttfamily void Enemy\+::\+Set\+Limit\+Ammo (\begin{DoxyParamCaption}\item[{const int \&}]{limit\+\_\+ammo }\end{DoxyParamCaption})}
+
+
+
+Setting limit of blocks. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em const} & int\& limit\+\_\+ammo -\/ new limit of blocks \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_enemy_a7283501a83da41e910f932b7a11a9cdc}\label{class_enemy_a7283501a83da41e910f932b7a11a9cdc}} 
+\index{Enemy@{Enemy}!SetXPosition@{SetXPosition}}
+\index{SetXPosition@{SetXPosition}!Enemy@{Enemy}}
+\doxysubsubsection{\texorpdfstring{SetXPosition()}{SetXPosition()}}
+{\footnotesize\ttfamily void Enemy\+::\+Set\+XPosition (\begin{DoxyParamCaption}\item[{const int \&}]{x }\end{DoxyParamCaption})}
+
+
+
+Setting x coordinate. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em const} & int\& x -\/ new x coordinate \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_enemy_ad01a0557dcfb80840b34ad05c42c1e59}\label{class_enemy_ad01a0557dcfb80840b34ad05c42c1e59}} 
+\index{Enemy@{Enemy}!SetYPosition@{SetYPosition}}
+\index{SetYPosition@{SetYPosition}!Enemy@{Enemy}}
+\doxysubsubsection{\texorpdfstring{SetYPosition()}{SetYPosition()}}
+{\footnotesize\ttfamily void Enemy\+::\+Set\+YPosition (\begin{DoxyParamCaption}\item[{const int \&}]{y }\end{DoxyParamCaption})}
+
+
+
+Setting y coordinate. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em const} & int\& y -\/ new y coordinate \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{_enemy_8h}{Enemy.\+h}}\item 
+Enemy.\+cpp\end{DoxyCompactItemize}

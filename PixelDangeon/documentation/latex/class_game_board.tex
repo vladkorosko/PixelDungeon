@@ -1,0 +1,350 @@
+\hypertarget{class_game_board}{}\doxysection{Game\+Board Class Reference}
+\label{class_game_board}\index{GameBoard@{GameBoard}}
+
+
+Class \mbox{\hyperlink{class_game_board}{Game\+Board}} for description model of map for the game.  
+
+
+
+
+{\ttfamily \#include $<$Gameboard.\+h$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+bool \mbox{\hyperlink{class_game_board_a3658e92cfbabf9f0dda1a56d62b98e89}{Check\+Not\+Enemy\+Position}} (const int \&x, const int \&y) const
+\begin{DoxyCompactList}\small\item\em Checks whether field is not enemy position. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_game_board_a46065eda34fddd38d969be960c39e261}{Game\+Board}} (int size, int numenemies)
+\begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_game_board_a4d88d0a5f2e43245efd1a9ddb542c198}{Set\+Map\+Element}} (const int \&x, const int \&y, const Place \&p)
+\begin{DoxyCompactList}\small\item\em Setting the map field. \end{DoxyCompactList}\item 
+std\+::vector$<$ std\+::vector$<$ Place $>$ $>$ \mbox{\hyperlink{class_game_board_a6097afa23c4ed9943df11d11c72d6ebe}{Get\+Map}} () const
+\begin{DoxyCompactList}\small\item\em Getting map. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_game_board_a54302e59b8f1443a0775434bd3409ab4}{Set\+Back\+Ground\+Element}} (const int \&x, const int \&y, const Place \&p)
+\begin{DoxyCompactList}\small\item\em Setting the background field. \end{DoxyCompactList}\item 
+std\+::vector$<$ std\+::vector$<$ Place $>$ $>$ \mbox{\hyperlink{class_game_board_a47200040cfec8d9ca857d2090e3cefea}{Get\+Back\+Ground}} () const
+\begin{DoxyCompactList}\small\item\em Getting map. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_game_board_a026f321bb26583a71005a0edd4ed2da1}{Set\+XPortal}} (int x)
+\begin{DoxyCompactList}\small\item\em Setting x coordinate of portal. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_game_board_a0ac2f7703b06fb60e4cb57209c2d8f7e}{Set\+YPortal}} (int y)
+\begin{DoxyCompactList}\small\item\em Setting y coordinate of portal. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_game_board_a83f721a694e3adc6b12d7d7de9df8625}{Get\+XPortal}} () const
+\begin{DoxyCompactList}\small\item\em Getting x coordinate of portal. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_game_board_ab4ce273ad5c867f2b63618a745658411}{Get\+YPortal}} () const
+\begin{DoxyCompactList}\small\item\em Getting y coordinate of portal. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_game_board_ae94aba27aeca4800145fd59769cad62d}{Set\+Enemy\+Index}} (const \mbox{\hyperlink{class_enemy}{Enemy}} \&e, int index)
+\begin{DoxyCompactList}\small\item\em Setting the enemy by the index in vector of enemies. \end{DoxyCompactList}\item 
+std\+::vector$<$ \mbox{\hyperlink{class_enemy}{Enemy}} $>$ \mbox{\hyperlink{class_game_board_a361d2a08879f0eeeb88e284dca7f2543}{Get\+Enemies}} () const
+\begin{DoxyCompactList}\small\item\em Getting vector of enemies. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_game_board_a309ce06b69f0102638e6b8d38ab1efeb}{Draw}} (sf\+::\+Render\+Window \&window) const
+\begin{DoxyCompactList}\small\item\em Show all map on screen. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_game_board_a524826308a848253c33c554a40ac4dc7}{Draw\+Vision\+Updated}} (sf\+::\+Render\+Window \&window, \mbox{\hyperlink{class_player}{Player}} \&p)
+\begin{DoxyCompactList}\small\item\em Show players vision on screen. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_game_board_acb66064a3fd8dd8207163629ef6838d8}{Auto\+Generate\+Walls}} (int number\+\_\+of\+\_\+walls, const \mbox{\hyperlink{class_player}{Player}} \&player)
+\begin{DoxyCompactList}\small\item\em Generates walls in random position if possible. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_game_board_a8d13d6c3b6081b91eba1c44d414386f2}{Auto\+Generate\+Traps}} (int number\+\_\+of\+\_\+traps, const \mbox{\hyperlink{class_player}{Player}} \&player)
+\begin{DoxyCompactList}\small\item\em Generates traps in random position if possible. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_game_board_a979345ba921f8fbb5f71391362c0cf8c}{Auto\+Generate\+Bonus\+Health}} (int number\+\_\+of\+\_\+hp, const \mbox{\hyperlink{class_player}{Player}} \&player)
+\begin{DoxyCompactList}\small\item\em Generates medical kits in random position if possible. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_game_board_a02c33298cd2ce7d2c1fa3810804ce448}{Auto\+Generate\+Bonus\+Blocks}} (int number\+\_\+of\+\_\+items, const \mbox{\hyperlink{class_player}{Player}} \&player)
+\begin{DoxyCompactList}\small\item\em Generates improvements for your bag in random position if possible. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Class \mbox{\hyperlink{class_game_board}{Game\+Board}} for description model of map for the game. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_game_board_a46065eda34fddd38d969be960c39e261}\label{class_game_board_a46065eda34fddd38d969be960c39e261}} 
+\index{GameBoard@{GameBoard}!GameBoard@{GameBoard}}
+\index{GameBoard@{GameBoard}!GameBoard@{GameBoard}}
+\doxysubsubsection{\texorpdfstring{GameBoard()}{GameBoard()}}
+{\footnotesize\ttfamily Game\+Board\+::\+Game\+Board (\begin{DoxyParamCaption}\item[{int}]{size,  }\item[{int}]{numenemies }\end{DoxyParamCaption})}
+
+
+
+Constructor. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em int} & size -\/ size of map \\
+\hline
+{\em int} & numenemies -\/ number of enemies on map \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_game_board_a02c33298cd2ce7d2c1fa3810804ce448}\label{class_game_board_a02c33298cd2ce7d2c1fa3810804ce448}} 
+\index{GameBoard@{GameBoard}!AutoGenerateBonusBlocks@{AutoGenerateBonusBlocks}}
+\index{AutoGenerateBonusBlocks@{AutoGenerateBonusBlocks}!GameBoard@{GameBoard}}
+\doxysubsubsection{\texorpdfstring{AutoGenerateBonusBlocks()}{AutoGenerateBonusBlocks()}}
+{\footnotesize\ttfamily void Game\+Board\+::\+Auto\+Generate\+Bonus\+Blocks (\begin{DoxyParamCaption}\item[{int}]{number\+\_\+of\+\_\+items,  }\item[{const \mbox{\hyperlink{class_player}{Player}} \&}]{player }\end{DoxyParamCaption})}
+
+
+
+Generates improvements for your bag in random position if possible. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em int} & number\+\_\+of\+\_\+items -\/ number of improvements to generate \\
+\hline
+{\em const} & \mbox{\hyperlink{class_player}{Player}}\& player -\/ the player \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_game_board_a979345ba921f8fbb5f71391362c0cf8c}\label{class_game_board_a979345ba921f8fbb5f71391362c0cf8c}} 
+\index{GameBoard@{GameBoard}!AutoGenerateBonusHealth@{AutoGenerateBonusHealth}}
+\index{AutoGenerateBonusHealth@{AutoGenerateBonusHealth}!GameBoard@{GameBoard}}
+\doxysubsubsection{\texorpdfstring{AutoGenerateBonusHealth()}{AutoGenerateBonusHealth()}}
+{\footnotesize\ttfamily void Game\+Board\+::\+Auto\+Generate\+Bonus\+Health (\begin{DoxyParamCaption}\item[{int}]{number\+\_\+of\+\_\+hp,  }\item[{const \mbox{\hyperlink{class_player}{Player}} \&}]{player }\end{DoxyParamCaption})}
+
+
+
+Generates medical kits in random position if possible. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em int} & number\+\_\+of\+\_\+hp -\/ number of medical kits to generate \\
+\hline
+{\em const} & \mbox{\hyperlink{class_player}{Player}}\& player -\/ the player \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_game_board_a8d13d6c3b6081b91eba1c44d414386f2}\label{class_game_board_a8d13d6c3b6081b91eba1c44d414386f2}} 
+\index{GameBoard@{GameBoard}!AutoGenerateTraps@{AutoGenerateTraps}}
+\index{AutoGenerateTraps@{AutoGenerateTraps}!GameBoard@{GameBoard}}
+\doxysubsubsection{\texorpdfstring{AutoGenerateTraps()}{AutoGenerateTraps()}}
+{\footnotesize\ttfamily void Game\+Board\+::\+Auto\+Generate\+Traps (\begin{DoxyParamCaption}\item[{int}]{number\+\_\+of\+\_\+traps,  }\item[{const \mbox{\hyperlink{class_player}{Player}} \&}]{player }\end{DoxyParamCaption})}
+
+
+
+Generates traps in random position if possible. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em int} & number\+\_\+of\+\_\+traps -\/ number of traps to generate \\
+\hline
+{\em const} & \mbox{\hyperlink{class_player}{Player}}\& player -\/ the player \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_game_board_acb66064a3fd8dd8207163629ef6838d8}\label{class_game_board_acb66064a3fd8dd8207163629ef6838d8}} 
+\index{GameBoard@{GameBoard}!AutoGenerateWalls@{AutoGenerateWalls}}
+\index{AutoGenerateWalls@{AutoGenerateWalls}!GameBoard@{GameBoard}}
+\doxysubsubsection{\texorpdfstring{AutoGenerateWalls()}{AutoGenerateWalls()}}
+{\footnotesize\ttfamily void Game\+Board\+::\+Auto\+Generate\+Walls (\begin{DoxyParamCaption}\item[{int}]{number\+\_\+of\+\_\+walls,  }\item[{const \mbox{\hyperlink{class_player}{Player}} \&}]{player }\end{DoxyParamCaption})}
+
+
+
+Generates walls in random position if possible. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em int} & number\+\_\+of\+\_\+walls -\/ number of walls to generate \\
+\hline
+{\em const} & \mbox{\hyperlink{class_player}{Player}}\& player -\/ the player \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_game_board_a3658e92cfbabf9f0dda1a56d62b98e89}\label{class_game_board_a3658e92cfbabf9f0dda1a56d62b98e89}} 
+\index{GameBoard@{GameBoard}!CheckNotEnemyPosition@{CheckNotEnemyPosition}}
+\index{CheckNotEnemyPosition@{CheckNotEnemyPosition}!GameBoard@{GameBoard}}
+\doxysubsubsection{\texorpdfstring{CheckNotEnemyPosition()}{CheckNotEnemyPosition()}}
+{\footnotesize\ttfamily bool Game\+Board\+::\+Check\+Not\+Enemy\+Position (\begin{DoxyParamCaption}\item[{const int \&}]{x,  }\item[{const int \&}]{y }\end{DoxyParamCaption}) const}
+
+
+
+Checks whether field is not enemy position. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em const} & int\& x -\/ x coordinate of field \\
+\hline
+{\em const} & int\& y -\/ y coordinate of field \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if field is not enemy position 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_game_board_a309ce06b69f0102638e6b8d38ab1efeb}\label{class_game_board_a309ce06b69f0102638e6b8d38ab1efeb}} 
+\index{GameBoard@{GameBoard}!Draw@{Draw}}
+\index{Draw@{Draw}!GameBoard@{GameBoard}}
+\doxysubsubsection{\texorpdfstring{Draw()}{Draw()}}
+{\footnotesize\ttfamily void Game\+Board\+::\+Draw (\begin{DoxyParamCaption}\item[{sf\+::\+Render\+Window \&}]{window }\end{DoxyParamCaption}) const}
+
+
+
+Show all map on screen. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ out}}  & {\em sf\+::\+Render\+Window\&} & window -\/ window of game \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_game_board_a524826308a848253c33c554a40ac4dc7}\label{class_game_board_a524826308a848253c33c554a40ac4dc7}} 
+\index{GameBoard@{GameBoard}!DrawVisionUpdated@{DrawVisionUpdated}}
+\index{DrawVisionUpdated@{DrawVisionUpdated}!GameBoard@{GameBoard}}
+\doxysubsubsection{\texorpdfstring{DrawVisionUpdated()}{DrawVisionUpdated()}}
+{\footnotesize\ttfamily void Game\+Board\+::\+Draw\+Vision\+Updated (\begin{DoxyParamCaption}\item[{sf\+::\+Render\+Window \&}]{window,  }\item[{\mbox{\hyperlink{class_player}{Player}} \&}]{p }\end{DoxyParamCaption})}
+
+
+
+Show players vision on screen. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ out}}  & {\em sf\+::\+Render\+Window\&} & window -\/ window of game \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_game_board_a47200040cfec8d9ca857d2090e3cefea}\label{class_game_board_a47200040cfec8d9ca857d2090e3cefea}} 
+\index{GameBoard@{GameBoard}!GetBackGround@{GetBackGround}}
+\index{GetBackGround@{GetBackGround}!GameBoard@{GameBoard}}
+\doxysubsubsection{\texorpdfstring{GetBackGround()}{GetBackGround()}}
+{\footnotesize\ttfamily std\+::vector$<$ std\+::vector$<$ Place $>$ $>$ Game\+Board\+::\+Get\+Back\+Ground (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Getting map. 
+
+\begin{DoxyReturn}{Returns}
+the map as vector of vectors of Place 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_game_board_a361d2a08879f0eeeb88e284dca7f2543}\label{class_game_board_a361d2a08879f0eeeb88e284dca7f2543}} 
+\index{GameBoard@{GameBoard}!GetEnemies@{GetEnemies}}
+\index{GetEnemies@{GetEnemies}!GameBoard@{GameBoard}}
+\doxysubsubsection{\texorpdfstring{GetEnemies()}{GetEnemies()}}
+{\footnotesize\ttfamily std\+::vector$<$ \mbox{\hyperlink{class_enemy}{Enemy}} $>$ Game\+Board\+::\+Get\+Enemies (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Getting vector of enemies. 
+
+\begin{DoxyReturn}{Returns}
+the vector of enemies 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_game_board_a6097afa23c4ed9943df11d11c72d6ebe}\label{class_game_board_a6097afa23c4ed9943df11d11c72d6ebe}} 
+\index{GameBoard@{GameBoard}!GetMap@{GetMap}}
+\index{GetMap@{GetMap}!GameBoard@{GameBoard}}
+\doxysubsubsection{\texorpdfstring{GetMap()}{GetMap()}}
+{\footnotesize\ttfamily std\+::vector$<$ std\+::vector$<$ Place $>$ $>$ Game\+Board\+::\+Get\+Map (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Getting map. 
+
+\begin{DoxyReturn}{Returns}
+the map as vector of vectors of Place 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_game_board_a83f721a694e3adc6b12d7d7de9df8625}\label{class_game_board_a83f721a694e3adc6b12d7d7de9df8625}} 
+\index{GameBoard@{GameBoard}!GetXPortal@{GetXPortal}}
+\index{GetXPortal@{GetXPortal}!GameBoard@{GameBoard}}
+\doxysubsubsection{\texorpdfstring{GetXPortal()}{GetXPortal()}}
+{\footnotesize\ttfamily int Game\+Board\+::\+Get\+XPortal (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Getting x coordinate of portal. 
+
+\begin{DoxyReturn}{Returns}
+the x coordinate of portal 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_game_board_ab4ce273ad5c867f2b63618a745658411}\label{class_game_board_ab4ce273ad5c867f2b63618a745658411}} 
+\index{GameBoard@{GameBoard}!GetYPortal@{GetYPortal}}
+\index{GetYPortal@{GetYPortal}!GameBoard@{GameBoard}}
+\doxysubsubsection{\texorpdfstring{GetYPortal()}{GetYPortal()}}
+{\footnotesize\ttfamily int Game\+Board\+::\+Get\+YPortal (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Getting y coordinate of portal. 
+
+\begin{DoxyReturn}{Returns}
+the y coordinate of portal 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_game_board_a54302e59b8f1443a0775434bd3409ab4}\label{class_game_board_a54302e59b8f1443a0775434bd3409ab4}} 
+\index{GameBoard@{GameBoard}!SetBackGroundElement@{SetBackGroundElement}}
+\index{SetBackGroundElement@{SetBackGroundElement}!GameBoard@{GameBoard}}
+\doxysubsubsection{\texorpdfstring{SetBackGroundElement()}{SetBackGroundElement()}}
+{\footnotesize\ttfamily void Game\+Board\+::\+Set\+Back\+Ground\+Element (\begin{DoxyParamCaption}\item[{const int \&}]{x,  }\item[{const int \&}]{y,  }\item[{const Place \&}]{p }\end{DoxyParamCaption})}
+
+
+
+Setting the background field. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em const} & int\& x -\/ x coordinate of field \\
+\hline
+{\em const} & int\& y -\/ y coordinate of field \\
+\hline
+{\em const} & Place\& p -\/ type of field \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_game_board_ae94aba27aeca4800145fd59769cad62d}\label{class_game_board_ae94aba27aeca4800145fd59769cad62d}} 
+\index{GameBoard@{GameBoard}!SetEnemyIndex@{SetEnemyIndex}}
+\index{SetEnemyIndex@{SetEnemyIndex}!GameBoard@{GameBoard}}
+\doxysubsubsection{\texorpdfstring{SetEnemyIndex()}{SetEnemyIndex()}}
+{\footnotesize\ttfamily void Game\+Board\+::\+Set\+Enemy\+Index (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_enemy}{Enemy}} \&}]{e,  }\item[{int}]{index }\end{DoxyParamCaption})}
+
+
+
+Setting the enemy by the index in vector of enemies. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em const} & \mbox{\hyperlink{class_enemy}{Enemy}}\& e -\/ new enemy \\
+\hline
+{\em int} & index -\/ the index in vector of enemies \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_game_board_a4d88d0a5f2e43245efd1a9ddb542c198}\label{class_game_board_a4d88d0a5f2e43245efd1a9ddb542c198}} 
+\index{GameBoard@{GameBoard}!SetMapElement@{SetMapElement}}
+\index{SetMapElement@{SetMapElement}!GameBoard@{GameBoard}}
+\doxysubsubsection{\texorpdfstring{SetMapElement()}{SetMapElement()}}
+{\footnotesize\ttfamily void Game\+Board\+::\+Set\+Map\+Element (\begin{DoxyParamCaption}\item[{const int \&}]{x,  }\item[{const int \&}]{y,  }\item[{const Place \&}]{p }\end{DoxyParamCaption})}
+
+
+
+Setting the map field. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em const} & int\& x -\/ x coordinate of field \\
+\hline
+{\em const} & int\& y -\/ y coordinate of field \\
+\hline
+{\em const} & Place\& p -\/ type of field \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_game_board_a026f321bb26583a71005a0edd4ed2da1}\label{class_game_board_a026f321bb26583a71005a0edd4ed2da1}} 
+\index{GameBoard@{GameBoard}!SetXPortal@{SetXPortal}}
+\index{SetXPortal@{SetXPortal}!GameBoard@{GameBoard}}
+\doxysubsubsection{\texorpdfstring{SetXPortal()}{SetXPortal()}}
+{\footnotesize\ttfamily void Game\+Board\+::\+Set\+XPortal (\begin{DoxyParamCaption}\item[{int}]{x }\end{DoxyParamCaption})}
+
+
+
+Setting x coordinate of portal. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em int} & x -\/ new x coordinate of portal \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_game_board_a0ac2f7703b06fb60e4cb57209c2d8f7e}\label{class_game_board_a0ac2f7703b06fb60e4cb57209c2d8f7e}} 
+\index{GameBoard@{GameBoard}!SetYPortal@{SetYPortal}}
+\index{SetYPortal@{SetYPortal}!GameBoard@{GameBoard}}
+\doxysubsubsection{\texorpdfstring{SetYPortal()}{SetYPortal()}}
+{\footnotesize\ttfamily void Game\+Board\+::\+Set\+YPortal (\begin{DoxyParamCaption}\item[{int}]{y }\end{DoxyParamCaption})}
+
+
+
+Setting y coordinate of portal. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em int} & y -\/ new y coordinate of portal \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{_gameboard_8h}{Gameboard.\+h}}\item 
+Gameboard.\+cpp\end{DoxyCompactItemize}

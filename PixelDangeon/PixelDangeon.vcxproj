@@ -152,6 +152,7 @@
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">SFML_STATIC</PreprocessorDefinitions>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">SFML_STATIC</PreprocessorDefinitions>
     </ClCompile>
+    <ClCompile Include="doctest.cpp" />
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="Gameboard.cpp" />
     <ClCompile Include="Moving.cpp" />
@@ -165,6 +166,7 @@
   <ItemGroup>
     <ClInclude Include="AI.h" />
     <ClInclude Include="Constatnts.h" />
+    <ClInclude Include="doctest.h" />
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="Menu.h" />
     <ClInclude Include="Moving.h" />

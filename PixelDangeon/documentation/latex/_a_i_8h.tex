@@ -1,0 +1,84 @@
+\hypertarget{_a_i_8h}{}\doxysection{AI.\+h File Reference}
+\label{_a_i_8h}\index{AI.h@{AI.h}}
+
+
+File for discription artificial inteligense.  
+
+
+{\ttfamily \#include \char`\"{}Moving.\+h\char`\"{}}\newline
+{\ttfamily \#include $<$mutex$>$}\newline
+{\ttfamily \#include $<$thread$>$}\newline
+{\ttfamily \#include $<$functional$>$}\newline
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{_a_i_8h_adb9afda86f358ba6b45d5abdf9dcded0}{AI}} (const \mbox{\hyperlink{class_game_board}{Game\+Board}} \&map, const \mbox{\hyperlink{class_player}{Player}} \&player, const \mbox{\hyperlink{class_enemy}{Enemy}} \&e)
+\begin{DoxyCompactList}\small\item\em Choose the direction for move(\+AI) \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{_a_i_8h_a58964e344a02aa9f16d1aeac72631571}{Move\+Enemies}} (\mbox{\hyperlink{class_game_board}{Game\+Board}} \&map, \mbox{\hyperlink{class_player}{Player}} \&player)
+\begin{DoxyCompactList}\small\item\em Move enemies. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{_a_i_8h_a57042dc6226c966d1d0dcbc4f6c52786}{Move\+Enemies\+Parallel}} (\mbox{\hyperlink{class_game_board}{Game\+Board}} \&map, \mbox{\hyperlink{class_player}{Player}} \&player)
+\begin{DoxyCompactList}\small\item\em Move enemies (multithreaded) \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+File for discription artificial inteligense. 
+
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{_a_i_8h_adb9afda86f358ba6b45d5abdf9dcded0}\label{_a_i_8h_adb9afda86f358ba6b45d5abdf9dcded0}} 
+\index{AI.h@{AI.h}!AI@{AI}}
+\index{AI@{AI}!AI.h@{AI.h}}
+\doxysubsubsection{\texorpdfstring{AI()}{AI()}}
+{\footnotesize\ttfamily int AI (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_game_board}{Game\+Board}} \&}]{map,  }\item[{const \mbox{\hyperlink{class_player}{Player}} \&}]{player,  }\item[{const \mbox{\hyperlink{class_enemy}{Enemy}} \&}]{e }\end{DoxyParamCaption})}
+
+
+
+Choose the direction for move(\+AI) 
+
+
+\begin{DoxyParams}{Parameters}
+{\em const} & \mbox{\hyperlink{class_game_board}{Game\+Board}}\& map -\/ the map of game \\
+\hline
+{\em const} & \mbox{\hyperlink{class_player}{Player}}\& player -\/ the player \\
+\hline
+{\em const} & \mbox{\hyperlink{class_enemy}{Enemy}}\& e -\/ the enemy that will be moved \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the direction in which to move 
+\end{DoxyReturn}
+\mbox{\Hypertarget{_a_i_8h_a58964e344a02aa9f16d1aeac72631571}\label{_a_i_8h_a58964e344a02aa9f16d1aeac72631571}} 
+\index{AI.h@{AI.h}!MoveEnemies@{MoveEnemies}}
+\index{MoveEnemies@{MoveEnemies}!AI.h@{AI.h}}
+\doxysubsubsection{\texorpdfstring{MoveEnemies()}{MoveEnemies()}}
+{\footnotesize\ttfamily void Move\+Enemies (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_game_board}{Game\+Board}} \&}]{map,  }\item[{\mbox{\hyperlink{class_player}{Player}} \&}]{player }\end{DoxyParamCaption})}
+
+
+
+Move enemies. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ out}}  & {\em Game\+Board\&} & map -\/ the map of game \\
+\hline
+\mbox{\texttt{ out}}  & {\em Player\&} & player -\/ the player \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{_a_i_8h_a57042dc6226c966d1d0dcbc4f6c52786}\label{_a_i_8h_a57042dc6226c966d1d0dcbc4f6c52786}} 
+\index{AI.h@{AI.h}!MoveEnemiesParallel@{MoveEnemiesParallel}}
+\index{MoveEnemiesParallel@{MoveEnemiesParallel}!AI.h@{AI.h}}
+\doxysubsubsection{\texorpdfstring{MoveEnemiesParallel()}{MoveEnemiesParallel()}}
+{\footnotesize\ttfamily void Move\+Enemies\+Parallel (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_game_board}{Game\+Board}} \&}]{map,  }\item[{\mbox{\hyperlink{class_player}{Player}} \&}]{player }\end{DoxyParamCaption})}
+
+
+
+Move enemies (multithreaded) 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ out}}  & {\em Game\+Board\&} & map -\/ the map of game \\
+\hline
+\mbox{\texttt{ out}}  & {\em Player\&} & player -\/ the player \\
+\hline
+\end{DoxyParams}

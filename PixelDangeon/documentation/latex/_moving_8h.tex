@@ -1,0 +1,86 @@
+\hypertarget{_moving_8h}{}\doxysection{Moving.\+h File Reference}
+\label{_moving_8h}\index{Moving.h@{Moving.h}}
+
+
+File for description moving of players and enemies.  
+
+
+{\ttfamily \#include \char`\"{}Gameboard.\+h\char`\"{}}\newline
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{_moving_8h_a681f42741e9f4e0785fd9a64ac201e63}{Move\+Player}} (\mbox{\hyperlink{class_game_board}{Game\+Board}} \&Map, \mbox{\hyperlink{class_player}{Player}} \&enemy, int key)
+\begin{DoxyCompactList}\small\item\em Move player in game. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{_moving_8h_a41d50a0e3fa40540a031473d61508caa}{Move\+Enemy}} (\mbox{\hyperlink{class_game_board}{Game\+Board}} \&Map, \mbox{\hyperlink{class_enemy}{Enemy}} \&enemy, \mbox{\hyperlink{class_player}{Player}} \&p, int key)
+\begin{DoxyCompactList}\small\item\em Move enemy in game. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{_moving_8h_ac19c602964404c19a04336e14d2aec41}{Magic}} (int x, int y, \mbox{\hyperlink{class_player}{Player}} \&player, \mbox{\hyperlink{class_game_board}{Game\+Board}} \&board)
+\begin{DoxyCompactList}\small\item\em Place a block from bag on map. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+File for description moving of players and enemies. 
+
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{_moving_8h_ac19c602964404c19a04336e14d2aec41}\label{_moving_8h_ac19c602964404c19a04336e14d2aec41}} 
+\index{Moving.h@{Moving.h}!Magic@{Magic}}
+\index{Magic@{Magic}!Moving.h@{Moving.h}}
+\doxysubsubsection{\texorpdfstring{Magic()}{Magic()}}
+{\footnotesize\ttfamily void Magic (\begin{DoxyParamCaption}\item[{int}]{x,  }\item[{int}]{y,  }\item[{\mbox{\hyperlink{class_player}{Player}} \&}]{player,  }\item[{\mbox{\hyperlink{class_game_board}{Game\+Board}} \&}]{board }\end{DoxyParamCaption})}
+
+
+
+Place a block from bag on map. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em int} & x -\/ x coordinate \\
+\hline
+\mbox{\texttt{ in}}  & {\em int} & y -\/ y coordinate \\
+\hline
+\mbox{\texttt{ out}}  & {\em Player\&} & player -\/ the player \\
+\hline
+\mbox{\texttt{ out}}  & {\em Game\+Board\&} & board -\/ the map of game \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{_moving_8h_a41d50a0e3fa40540a031473d61508caa}\label{_moving_8h_a41d50a0e3fa40540a031473d61508caa}} 
+\index{Moving.h@{Moving.h}!MoveEnemy@{MoveEnemy}}
+\index{MoveEnemy@{MoveEnemy}!Moving.h@{Moving.h}}
+\doxysubsubsection{\texorpdfstring{MoveEnemy()}{MoveEnemy()}}
+{\footnotesize\ttfamily void Move\+Enemy (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_game_board}{Game\+Board}} \&}]{Map,  }\item[{\mbox{\hyperlink{class_enemy}{Enemy}} \&}]{enemy,  }\item[{\mbox{\hyperlink{class_player}{Player}} \&}]{p,  }\item[{int}]{key }\end{DoxyParamCaption})}
+
+
+
+Move enemy in game. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ out}}  & {\em Game\+Board\&} & Map -\/ the map of game \\
+\hline
+\mbox{\texttt{ out}}  & {\em Enemy\&} & enemy -\/ the enemy that moves \\
+\hline
+\mbox{\texttt{ out}}  & {\em Player\&} & enemy -\/ the player \\
+\hline
+\mbox{\texttt{ in}}  & {\em int} & key -\/ direction to move \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{_moving_8h_a681f42741e9f4e0785fd9a64ac201e63}\label{_moving_8h_a681f42741e9f4e0785fd9a64ac201e63}} 
+\index{Moving.h@{Moving.h}!MovePlayer@{MovePlayer}}
+\index{MovePlayer@{MovePlayer}!Moving.h@{Moving.h}}
+\doxysubsubsection{\texorpdfstring{MovePlayer()}{MovePlayer()}}
+{\footnotesize\ttfamily void Move\+Player (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_game_board}{Game\+Board}} \&}]{Map,  }\item[{\mbox{\hyperlink{class_player}{Player}} \&}]{enemy,  }\item[{int}]{key }\end{DoxyParamCaption})}
+
+
+
+Move player in game. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ out}}  & {\em Game\+Board\&} & Map -\/ the map of game \\
+\hline
+\mbox{\texttt{ out}}  & {\em Player\&} & enemy -\/ the player \\
+\hline
+\mbox{\texttt{ in}}  & {\em int} & key -\/ direction to move \\
+\hline
+\end{DoxyParams}
